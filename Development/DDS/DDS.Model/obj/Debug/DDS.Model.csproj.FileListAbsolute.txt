@@ -1,0 +1,4 @@
+C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Model\bin\Debug\DDS.Model.dll
+C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Model\bin\Debug\DDS.Model.pdb
+C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Model\obj\Debug\DDS.Model.dll
+C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Model\obj\Debug\DDS.Model.pdb
