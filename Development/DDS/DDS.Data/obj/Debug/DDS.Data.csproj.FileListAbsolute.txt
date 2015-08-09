@@ -1,4 +1,3 @@
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\obj\Debug\DDS.Data.csprojResolveAssemblyReference.cache
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\bin\Debug\DDS.Data.dll.config
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\bin\Debug\DDS.Data.dll
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\bin\Debug\DDS.Data.pdb
@@ -8,5 +7,6 @@ C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\bin\D
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\bin\Debug\DDS.Model.pdb
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\bin\Debug\EntityFramework.xml
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\obj\Debug\DDS.Data.csprojResolveAssemblyReference.cache
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\obj\Debug\DDS.Data.dll
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Data\obj\Debug\DDS.Data.pdb
