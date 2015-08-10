@@ -15,5 +15,7 @@ namespace DDS.Model.Models
         public string Descripcion { get; set; }
 
         public string Contraindicaciones { get; set; }
+
+        public virtual List<Perfil> Perfiles { get; set; }
     }
 }

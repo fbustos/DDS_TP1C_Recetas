@@ -16,7 +16,8 @@ namespace DDS.Data
         { }
 
         public DbSet<Usuario> Usuarios { get; set; }
- 
+        public DbSet<PiramideAlimenticia> PiramideAlimenticias { get; set; }
+
         public virtual void Commit()
         {
             base.SaveChanges();
@@ -25,6 +26,7 @@ namespace DDS.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new UsuarioConfiguration());
+            modelBuilder.Configurations.Add(new PiramideAlimenticiaConfiguration());
         }
     }
 }

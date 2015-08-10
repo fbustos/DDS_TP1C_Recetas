@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using DDS.Data;
 
 namespace DDS
 {
@@ -14,6 +15,8 @@ namespace DDS
     {
         protected void Application_Start()
         {
+            // Init database
+            System.Data.Entity.Database.SetInitializer(new RecetasSeedData());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

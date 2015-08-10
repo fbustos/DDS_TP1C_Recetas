@@ -1,4 +1,5 @@
-﻿using DDS.Model.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using DDS.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -13,7 +14,7 @@ namespace DDS.Data.Configuration
         public UsuarioConfiguration()
         {
             ToTable("Usuarios").HasKey(u => u.Id);
-            Property(u => u.Id).IsRequired();
+            Property(u => u.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(u => u.Username).IsRequired().HasMaxLength(50);
             Property(u => u.Password).IsRequired().HasMaxLength(50);
             Property(u => u.Perfil.Altura).IsOptional();
