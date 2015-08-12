@@ -16,7 +16,7 @@ namespace DDS
         protected void Application_Start()
         {
             // Init database
-            System.Data.Entity.Database.SetInitializer(new RecetasSeedData());
+            //System.Data.Entity.Database.SetInitializer(new RecetasSeedData());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

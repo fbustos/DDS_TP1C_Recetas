@@ -24,6 +24,7 @@ namespace DDS.Data.Configuration
             Property(u => u.Perfil.Rutina).IsOptional();
             Property(u => u.Perfil.Nombre).IsOptional().HasMaxLength(50);
             Property(u => u.Perfil.Sexo).IsOptional();
+            Property(u => u.Perfil.PreferenciaAlimenticia).IsOptional();
         }
     }
 }

@@ -42,6 +42,12 @@ namespace DDS.Service
             return usuario;
         }
 
+        public Usuario GetByUsername(string username)
+        {
+            var usuario = usuariosRepository.Get(u => u.Username == username);
+            return usuario;
+        }
+
         public void CreateUsuario(Usuario usuario)
         {
             usuariosRepository.Add(usuario);

@@ -19,18 +19,20 @@ namespace DDS.Data
 
         private static List<Usuario> GetUsuarios()
         {
-            return new List<Usuario>
+            var usuarios = new List<Usuario>
             {
                 new Usuario {
                     Id = 1,
                     Username = "fbustos",
-                    Password = "cualquiera",
                     Perfil = new Perfil
                     {
                          Nombre = "Franco"
                     }
                 }
             };
+
+            usuarios.ForEach(x => x.SetPassword("123456"));
+            return usuarios;
         }
     }
 }

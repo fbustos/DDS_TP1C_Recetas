@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\IngredienteConfiguration.cs" />
+    <Compile Include="Configuration\PasoConfiguration.cs" />
+    <Compile Include="Configuration\CondimentoConfiguration.cs" />
     <Compile Include="Configuration\RecetaConfiguration.cs" />
     <Compile Include="Configuration\UsuarioConfiguration.cs" />
     <Compile Include="DataContext.cs" />

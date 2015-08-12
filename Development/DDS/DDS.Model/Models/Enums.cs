@@ -45,4 +45,28 @@ namespace DDS.Model.Enums
         Hipertension = 2,
         Celiasis = 3
     }
+
+    public enum Dificultad
+    {
+        Facil = 1,
+        Media = 2,
+        Dificil = 3,
+        MuyDificil = 4
+    }
+
+    public enum PiramideAlimenticia
+    {
+        Vegetales = 1,
+        Lacteos = 2,
+        Carnes = 3,
+        Dulces = 4
+    }
+
+    public enum Temporada
+    {
+        Verano = 1,
+        Otonio = 2,
+        Invierno = 3,
+        Primavera = 4
+    }
 }

@@ -15,5 +15,7 @@ namespace DDS.Service
         Usuario GetUsuario(int id);
         void CreateUsuario(Usuario usuario);
         void SaveUsuario();
+
+        Usuario GetByUsername(string username);
     }
 }

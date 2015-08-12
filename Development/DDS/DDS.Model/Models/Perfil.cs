@@ -21,7 +21,7 @@ namespace DDS.Model.Models
 
         public Dieta Dieta { get; set; }
 
-        //public PiramideAlimenticia PreferenciaAlimenticia { get; set; }
+        public PiramideAlimenticia PreferenciaAlimenticia { get; set; }
 
         public Rutina Rutina { get; set; }
     }

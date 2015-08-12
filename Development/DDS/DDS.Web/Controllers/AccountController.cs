@@ -27,9 +27,22 @@ namespace DDS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuarios = usuarioService.GetUsuarios();
+                var usuario = usuarioService.GetByUsername(model.Username);
+                if (usuario != null)
+                {
+                    if (usuario.CheckPassword(model.Password))
+                    {
+                        return View(model);
+                    }
+
+                    ModelState.AddModelError("IncorrectPassword", "La contraseña es incorrecta.");
+                }
+                else
+                {
+                    ModelState.AddModelError("UserNotExist", "El usuario ingresado no existe.");
+                }
             }
-            return View();
+            return View(model);
         }
     }
 }

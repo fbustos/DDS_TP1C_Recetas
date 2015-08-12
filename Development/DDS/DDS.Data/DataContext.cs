@@ -17,6 +17,9 @@ namespace DDS.Data
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Receta> Recetas { get; set; }
+        public DbSet<Ingrediente> Ingredientes { get; set; }
+        public DbSet<Condimento> Condimentos { get; set; }
+        public DbSet<Paso> Pasos { get; set; }
 
         public virtual void Commit()
         {
@@ -27,6 +30,9 @@ namespace DDS.Data
         {
             modelBuilder.Configurations.Add(new UsuarioConfiguration());
             modelBuilder.Configurations.Add(new RecetaConfiguration());
+            modelBuilder.Configurations.Add(new IngredienteConfiguration());
+            modelBuilder.Configurations.Add(new CondimentoConfiguration());
+            modelBuilder.Configurations.Add(new PasoConfiguration());
         }
     }
 }
