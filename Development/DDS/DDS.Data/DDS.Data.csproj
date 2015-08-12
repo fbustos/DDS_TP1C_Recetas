@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\PiramideAlimenticiaConfiguration.cs" />
+    <Compile Include="Configuration\RecetaConfiguration.cs" />
     <Compile Include="Configuration\UsuarioConfiguration.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />

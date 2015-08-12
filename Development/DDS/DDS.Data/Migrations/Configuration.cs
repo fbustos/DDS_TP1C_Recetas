@@ -9,7 +9,7 @@ namespace DDS.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(DDS.Data.DataContext context)
