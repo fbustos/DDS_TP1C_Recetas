@@ -18,7 +18,7 @@ namespace DDS.Web.Mappings
 
         protected override void Configure()
         {
-            Mapper.CreateMap<UsuarioViewModel, Usuario>();
+            //Mapper.CreateMap<UsuarioViewModel, Usuario>();
                 //.ForMember(g => g.Name, map => map.MapFrom(vm => vm.GadgetTitle))
                 //.ForMember(g => g.Description, map => map.MapFrom(vm => vm.GadgetDescription))
                 //.ForMember(g => g.Price, map => map.MapFrom(vm => vm.GadgetPrice))

@@ -18,7 +18,7 @@ namespace DDS.Web.Mappings
 
         protected override void Configure()
         {
-            Mapper.CreateMap<Usuario, UsuarioViewModel>();
+            //Mapper.CreateMap<Usuario, UsuarioViewModel>();
         }
     }
 }

@@ -44,5 +44,33 @@ namespace DDS.Controllers
             }
             return View(model);
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = usuarioService.GetByUsername(model.Username);
+                if (usuario != null)
+                {
+                    if (usuario.CheckPassword(model.Password))
+                    {
+                        return View(model);
+                    }
+
+                    ModelState.AddModelError("IncorrectPassword", "La contraseña es incorrecta.");
+                }
+                else
+                {
+                    ModelState.AddModelError("UserNotExist", "El usuario ingresado no existe.");
+                }
+            }
+            return View(model);
+        }
     }
 }
