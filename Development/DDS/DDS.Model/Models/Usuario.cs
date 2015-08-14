@@ -5,6 +5,11 @@ namespace DDS.Model.Models
 {
     public class Usuario
     {
+        public Usuario()
+        {
+            this.Perfil = new Perfil();
+        }
+
         public int Id { get; set; }
 
         public string Username { get; set; }

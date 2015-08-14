@@ -1,4 +1,6 @@
-﻿using DDS.Models.ViewModels;
+﻿using System.Web.Security;
+using DDS.Model.Models;
+using DDS.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +36,7 @@ namespace DDS.Controllers
                     {
                         return View(model);
                     }
-
+                    
                     ModelState.AddModelError("IncorrectPassword", "La contraseña es incorrecta.");
                 }
                 else
@@ -55,20 +57,12 @@ namespace DDS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = usuarioService.GetByUsername(model.Username);
-                if (usuario != null)
-                {
-                    if (usuario.CheckPassword(model.Password))
-                    {
-                        return View(model);
-                    }
+                var usuario = new Usuario { Username = model.Username };
+                usuario.SetPassword(model.Password);
 
-                    ModelState.AddModelError("IncorrectPassword", "La contraseña es incorrecta.");
-                }
-                else
-                {
-                    ModelState.AddModelError("UserNotExist", "El usuario ingresado no existe.");
-                }
+                usuarioService.CreateUsuario(usuario);
+                usuarioService.SaveUsuario();
+                TempData["RegisterSuccessMessage"] = string.Format("Usuario '{0}' creado correctamente.", usuario.Username);
             }
             return View(model);
         }
