@@ -13,7 +13,7 @@ namespace DDS.Model.Models
 
         public int Porcion { get; set; }
 
-        public double CaloriasPorcion { get; set; }
+        public int CaloriasPorcion { get; set; }
 
         public virtual IList<Receta> Recetas { get; set; }
     }

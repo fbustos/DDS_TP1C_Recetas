@@ -23,6 +23,6 @@ namespace DDS.Model.Models
 
         public Temporada Temporada { get; set; }
 
-        public double Calorias { get; set; }
+        public int Calorias { get; set; }
     }
 }

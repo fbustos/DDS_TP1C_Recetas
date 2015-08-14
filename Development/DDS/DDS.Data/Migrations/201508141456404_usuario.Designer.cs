@@ -7,13 +7,13 @@ namespace DDS.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Nueva : IMigrationMetadata
+    public sealed partial class usuario : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Nueva));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(usuario));
         
         string IMigrationMetadata.Id
         {
-            get { return "201508140345036_Nueva"; }
+            get { return "201508141456404_usuario"; }
         }
         
         string IMigrationMetadata.Source

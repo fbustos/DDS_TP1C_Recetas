@@ -24,6 +24,7 @@ namespace DDS.Data
                 new Usuario {
                     Id = 1,
                     Username = "fbustos",
+                    FechaCreacion = DateTime.Now,
                     Perfil = new Perfil
                     {
                          Nombre = "Franco"

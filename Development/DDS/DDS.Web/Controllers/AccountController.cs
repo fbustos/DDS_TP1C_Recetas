@@ -34,7 +34,14 @@ namespace DDS.Controllers
                 {
                     if (usuario.CheckPassword(model.Password))
                     {
-                        return View(model);
+                        if (usuario.ActualizarPerfil())
+                        {
+                            return View(model);
+                        }
+                        else
+                        {
+                            return View(model);
+                        }
                     }
                     
                     ModelState.AddModelError("IncorrectPassword", "La contraseña es incorrecta.");
@@ -53,7 +60,7 @@ namespace DDS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterViewModel model)
+        public ActionResult Register(UsuarioViewModel model)
         {
             if (ModelState.IsValid)
             {

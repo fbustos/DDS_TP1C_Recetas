@@ -17,14 +17,16 @@ namespace DDS.Data.Configuration
             Property(u => u.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(u => u.Username).IsRequired().HasMaxLength(50);
             Property(u => u.Password).IsRequired().HasMaxLength(50);
+            Property(u => u.FechaCreacion).IsRequired();
+            Property(u => u.FechaUltimaModificacion).IsOptional();
             Property(u => u.Perfil.Altura).IsOptional();
             Property(u => u.Perfil.Complexion).IsOptional();
             Property(u => u.Perfil.Dieta).IsOptional();
-            Property(u => u.Perfil.Edad).IsOptional();
             Property(u => u.Perfil.Rutina).IsOptional();
             Property(u => u.Perfil.Nombre).IsOptional().HasMaxLength(50);
             Property(u => u.Perfil.Sexo).IsOptional();
             Property(u => u.Perfil.PreferenciaAlimenticia).IsOptional();
+            Property(u => u.Perfil.FechaNacimiento).IsOptional();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model DDS.Models.ViewModels.UsuarioViewModel
 @{
-    ViewBag.Title = "Registrar Usuario";
+    ViewBag.Title = "Cargar Perfil Nutricional";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -21,15 +21,19 @@
                     </div>
                 }
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.Sexo, new List<SelectListItem>
+                                                         {
+                                                            new SelectListItem{ Text="Masculino", Value = "M" },
+                                                            new SelectListItem{ Text="Femenino", Value = "F" }
+                                                         }, "--- Seleccione ---", new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
