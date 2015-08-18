@@ -7,19 +7,19 @@ namespace DDS.Model.Models
     {
         public string Nombre { get; set; }
 
-        public Sexo Sexo { get; set; }
+        public Sexo? Sexo { get; set; }
 
         public DateTime? FechaNacimiento { get; set; }
 
         public float Altura { get; set; }
 
-        public Complexion Complexion { get; set; }
+        public Complexion? Complexion { get; set; }
 
-        public Dieta Dieta { get; set; }
+        public Dieta? Dieta { get; set; }
 
-        public PiramideAlimenticia PreferenciaAlimenticia { get; set; }
+        public PiramideAlimenticia? PreferenciaAlimenticia { get; set; }
 
-        public Rutina Rutina { get; set; }
+        public Rutina? Rutina { get; set; }
 
         public int? Edad
         {

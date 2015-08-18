@@ -62,9 +62,9 @@
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Interfaces\IUsuarioRepository.cs" />
-    <Compile Include="Migrations\201508141456404_usuario.cs" />
-    <Compile Include="Migrations\201508141456404_usuario.Designer.cs">
-      <DependentUpon>201508141456404_usuario.cs</DependentUpon>
+    <Compile Include="Migrations\201508160354238_CargarPerfil.cs" />
+    <Compile Include="Migrations\201508160354238_CargarPerfil.Designer.cs">
+      <DependentUpon>201508160354238_CargarPerfil.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,8 +82,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201508141456404_usuario.resx">
-      <DependentUpon>201508141456404_usuario.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201508160354238_CargarPerfil.resx">
+      <DependentUpon>201508160354238_CargarPerfil.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

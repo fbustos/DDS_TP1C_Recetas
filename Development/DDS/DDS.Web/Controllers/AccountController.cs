@@ -36,7 +36,7 @@ namespace DDS.Controllers
                     {
                         if (usuario.ActualizarPerfil())
                         {
-                            return View(model);
+                            return RedirectToAction("CargarPerfil");
                         }
                         else
                         {
@@ -60,7 +60,7 @@ namespace DDS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(UsuarioViewModel model)
+        public ActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +72,11 @@ namespace DDS.Controllers
                 TempData["RegisterSuccessMessage"] = string.Format("Usuario '{0}' creado correctamente.", usuario.Username);
             }
             return View(model);
+        }
+
+        public ActionResult CargarPerfil()
+        {
+            return View();
         }
     }
 }
