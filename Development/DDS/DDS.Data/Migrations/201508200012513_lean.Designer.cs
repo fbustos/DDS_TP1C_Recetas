@@ -7,13 +7,13 @@ namespace DDS.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CargarPerfil : IMigrationMetadata
+    public sealed partial class lean : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CargarPerfil));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(lean));
         
         string IMigrationMetadata.Id
         {
-            get { return "201508160354238_CargarPerfil"; }
+            get { return "201508200012513_lean"; }
         }
         
         string IMigrationMetadata.Source

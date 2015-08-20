@@ -50,6 +50,7 @@ namespace DDS.Service
 
         public void CreateUsuario(Usuario usuario)
         {
+            usuario.FechaCreacion = DateTime.Now;
             usuariosRepository.Add(usuario);
         }
 
