@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DDS.Model.Enums
 {
@@ -33,9 +28,9 @@ namespace DDS.Model.Enums
 
     public enum Sexo
     {
-        [Description("Masculino")]
+        [Display(Name = "Masculino")]
         M = 1,
-        [Description("Femenino")]
+        [Display(Name = "Femenino")]
         F = 2
     }
 
