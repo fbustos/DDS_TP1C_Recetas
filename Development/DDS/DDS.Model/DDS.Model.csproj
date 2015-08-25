@@ -43,7 +43,7 @@
     <Compile Include="Exceptions\ClassException.cs" />
     <Compile Include="Exceptions\DbException.cs" />
     <Compile Include="Models\Condimento.cs" />
-    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Enums\Enums.cs" />
     <Compile Include="Models\Ingrediente.cs" />
     <Compile Include="Models\Paso.cs" />
     <Compile Include="Models\Perfil.cs" />

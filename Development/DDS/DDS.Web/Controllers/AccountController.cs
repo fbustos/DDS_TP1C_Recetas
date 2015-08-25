@@ -45,7 +45,7 @@ namespace DDS.Controllers
                         }
                         else
                         {
-                            return View(model);
+                            return RedirectToAction("Home", "Home");
                         }
                     }
                     
