@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using DDS.Model.Models;
+
 namespace DDS.Data.Migrations
 {
     using System;
@@ -14,18 +17,28 @@ namespace DDS.Data.Migrations
 
         protected override void Seed(DDS.Data.DataContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            GetUsuarios().ForEach(u => context.Usuarios.Add(u));
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Commit();
+        }
+
+        private static List<Usuario> GetUsuarios()
+        {
+            var usuarios = new List<Usuario>
+            {
+                new Usuario {
+                    Id = 1,
+                    Username = "fbustos",
+                    FechaCreacion = DateTime.Now,
+                    Perfil = new Perfil
+                    {
+                         Nombre = "Franco"
+                    }
+                }
+            };
+
+            usuarios.ForEach(x => x.SetPassword("123456"));
+            return usuarios;
         }
     }
 }

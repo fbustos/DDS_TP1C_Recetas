@@ -17,5 +17,7 @@ namespace DDS.Service
         void SaveUsuario();
 
         Usuario GetByUsername(string username);
+
+        void UpdateUsuario(Usuario usuario);
     }
 }
