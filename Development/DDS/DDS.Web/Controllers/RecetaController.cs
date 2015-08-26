@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AutoMapper;
+using DDS.Model.Models;
+using DDS.Models.ViewModels;
+using DDS.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,82 +12,30 @@ namespace DDS.Controllers
 {
     public class RecetaController : BaseController
     {
-        // GET: Receta
-        public ActionResult Index()
+        private readonly IRecetaService recetaService;
+        public RecetaController(IRecetaService recetaService)
         {
-            return View();
+            this.recetaService = recetaService;
         }
-
-        // GET: Receta/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Receta/Create
-        public ActionResult Create()
+        public ActionResult CargarReceta()
         {
             return View();
         }
 
         // POST: Receta/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult CargarReceta(CargarRecetaViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                var receta = Mapper.Map<CargarRecetaViewModel, Receta>(model);
+                recetaService.CreateReceta(receta);
+                recetaService.SaveReceta();
+                TempData["SuccessMessage"] = string.Format("Receta '{0}' cargado correctamente.", receta.Nombre);
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: Receta/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Receta/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Receta/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Receta/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View(model);
         }
     }
 }

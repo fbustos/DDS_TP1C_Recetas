@@ -15,11 +15,14 @@ namespace DDS.Data.Configuration
         {
             ToTable("Recetas").HasKey(u => u.Id);
             Property(u => u.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(u => u.Dificultad).IsOptional();
             Property(u => u.Nombre).IsOptional();
+            Property(u => u.Dificultad).IsOptional();
+            Property(u => u.Temporada).IsOptional();
             Property(u => u.Calorias).IsOptional();
+            Property(u => u.FechaCreacion).IsRequired();
+            Property(u => u.FechaUltimaModificacion).IsOptional();
 
-            HasMany(x => x.Ingredientes).WithMany(x => x.Recetas).Map(
+            /*HasMany(x => x.Ingredientes).WithMany(x => x.Recetas).Map(
                 m =>
                 {
                     m.MapLeftKey("RecetaId");
@@ -39,7 +42,7 @@ namespace DDS.Data.Configuration
                     m.MapLeftKey("RecetaId");
                     m.MapRightKey("PasoId");
                     m.ToTable("RecetasPasos");
-                });
+                });*/
         }
     }
 }

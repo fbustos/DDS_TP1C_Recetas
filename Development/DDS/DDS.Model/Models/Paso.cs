@@ -11,7 +11,7 @@ namespace DDS.Model.Models
 
         public string Descripcion { get; set; }
 
-        public byte[] Imagen { get; set; }
+        public string Imagen { get; set; }
 
         public virtual IList<Receta> Recetas { get; set; }
     }
