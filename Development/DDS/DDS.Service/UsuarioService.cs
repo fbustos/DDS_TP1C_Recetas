@@ -54,6 +54,12 @@ namespace DDS.Service
             usuariosRepository.Add(usuario);
         }
 
+        public void UpdateUsuario(Usuario usuario)
+        {
+            usuario.FechaUltimaModificacion = DateTime.Now;
+            usuariosRepository.Update(usuario);
+        }
+
         public void SaveUsuario()
         {
             unitOfWork.Commit();
