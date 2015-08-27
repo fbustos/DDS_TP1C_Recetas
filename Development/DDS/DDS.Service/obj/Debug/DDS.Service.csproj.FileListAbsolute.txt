@@ -9,14 +9,3 @@ C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Services\b
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Services\obj\Debug\DDS.Service.csprojResolveAssemblyReference.cache
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Services\obj\Debug\DDS.Services.dll
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Services\obj\Debug\DDS.Services.pdb
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Service.dll
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Service.pdb
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Data.dll
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Model.dll
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\EntityFramework.dll
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Data.pdb
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Model.pdb
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\EntityFramework.xml
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\obj\Debug\DDS.Service.csprojResolveAssemblyReference.cache
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\obj\Debug\DDS.Service.dll
-C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Service\obj\Debug\DDS.Service.pdb

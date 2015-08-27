@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Qué comer?</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/datatables/css")
+    @Styles.Render("~/Content/datepicker/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/datepicker")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,10 +27,24 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Home", "Home")</li>
-                    <li>@Html.ActionLink("Cargar Perfil", "CargarPerfil", "Account")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Grupos <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Administrar mis Grupos", "MisGrupos", "Grupo")</li>
+                            <li>@Html.ActionLink("Crear Grupo", "Home", "Home")</li>
+                            <li>@Html.ActionLink("Ver Grupos", "Home", "Home")</li>
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Cerrar Sesión", "LogOut", "Account")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.User.Username <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Mi Perfil", "CargarPerfil", "Account")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Cerrar Sesión", "LogOut", "Account")</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -37,8 +57,6 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

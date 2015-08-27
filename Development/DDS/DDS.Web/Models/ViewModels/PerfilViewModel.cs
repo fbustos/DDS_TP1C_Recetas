@@ -15,7 +15,7 @@ namespace DDS.Models.ViewModels
         [Required(ErrorMessage = "Debe completar la Fecha de Nacimiento.")]
         [Display(Name = "Fecha de Nacimiento")]
         [DataType(DataType.Date)]
-        public string FechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
 
         [Required(ErrorMessage = "Debe completar la Altura.")]
         public float Altura { get; set; }

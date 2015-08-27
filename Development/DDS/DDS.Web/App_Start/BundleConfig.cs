@@ -27,9 +27,21 @@ namespace DDS
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                      "~/Scripts/datatables.js"));
+
+            bundles.Add(new StyleBundle("~/Content/datatables/css").Include(
+                      "~/Content/datatables.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+                      "~/Scripts/bootstrap-datepicker.js"));
+
+            bundles.Add(new StyleBundle("~/Content/datepicker/css").Include(
+                      "~/Content/datepicker.css"));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

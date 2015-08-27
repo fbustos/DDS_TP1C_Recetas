@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 namespace DDS.Model.Models
@@ -21,6 +23,8 @@ namespace DDS.Model.Models
         public DateTime FechaCreacion { get; set; }
 
         public DateTime? FechaUltimaModificacion { get; set; }
+
+        public IList<Grupo> Grupos { get; set; }
 
         public void SetPassword(string password)
         {

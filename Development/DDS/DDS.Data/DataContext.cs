@@ -20,6 +20,7 @@ namespace DDS.Data
         public DbSet<Ingrediente> Ingredientes { get; set; }
         public DbSet<Condimento> Condimentos { get; set; }
         public DbSet<Paso> Pasos { get; set; }
+        public DbSet<Grupo> Grupos { get; set; }
 
         public virtual void Commit()
         {
@@ -33,6 +34,7 @@ namespace DDS.Data
             modelBuilder.Configurations.Add(new IngredienteConfiguration());
             modelBuilder.Configurations.Add(new CondimentoConfiguration());
             modelBuilder.Configurations.Add(new PasoConfiguration());
+            modelBuilder.Configurations.Add(new GrupoConfiguration());
         }
     }
 }

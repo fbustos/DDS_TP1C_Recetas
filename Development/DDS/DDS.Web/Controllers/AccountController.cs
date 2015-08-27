@@ -101,7 +101,9 @@ namespace DDS.Controllers
         [CustomAuthorize]
         public ActionResult CargarPerfil()
         {
-            return View();
+            var usuario = usuarioService.GetByUsername(this.Current.User.Username);
+            var model = Mapper.Map<Perfil, PerfilViewModel>(usuario.Perfil);
+            return View(model);
         }
 
         [HttpPost]
