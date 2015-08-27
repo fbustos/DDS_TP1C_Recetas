@@ -13,16 +13,14 @@ namespace DDS.Model.Models
 
         public string Nombre { get; set; }
 
-        public virtual IList<Ingrediente> Ingredientes { get; set; }
-
-        public virtual IList<Condimento> Condimentos { get; set; }
-
-        public virtual IList<Paso> Pasos { get; set; }
-
         public Dificultad Dificultad { get; set; }
 
         public Temporada Temporada { get; set; }
 
         public int Calorias { get; set; }
+
+        public DateTime FechaCreacion { get; set; }
+
+        public DateTime? FechaUltimaModificacion { get; set; }
     }
 }
