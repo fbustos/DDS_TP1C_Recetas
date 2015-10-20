@@ -8,7 +8,7 @@ using DDS.Model.Models;
 
 namespace DDS.Data
 {
-    public class RecetasSeedData : DropCreateDatabaseIfModelChanges<DataContext>
+    public class RecetasSeedData : CreateDatabaseIfNotExists<DataContext>
     {
         protected override void Seed(DataContext context)
         {

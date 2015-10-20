@@ -9,3 +9,14 @@ C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Services\b
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Services\obj\Debug\DDS.Service.csprojResolveAssemblyReference.cache
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Services\obj\Debug\DDS.Services.dll
 C:\Users\Franco\Documents\GitHub\DDS_TP1C_Recetas\Development\DDS\DDS.Services\obj\Debug\DDS.Services.pdb
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\bin\Debug\DDS.Service.dll
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\bin\Debug\DDS.Service.pdb
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\bin\Debug\DDS.Data.dll
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\bin\Debug\DDS.Model.dll
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\bin\Debug\EntityFramework.dll
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\bin\Debug\DDS.Data.pdb
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\bin\Debug\DDS.Model.pdb
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\bin\Debug\EntityFramework.xml
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\obj\Debug\DDS.Service.csprojResolveAssemblyReference.cache
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\obj\Debug\DDS.Service.dll
+D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\obj\Debug\DDS.Service.pdb
