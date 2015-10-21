@@ -30,7 +30,7 @@ namespace DDS.Service
 
         public IEnumerable<Grupo> GetGruposPorUsuarioUnido(int id)
         {
-            var grupos = this.GetGrupos().Where(g => g.Usuarios.Where(u => u.Id == id).Count()==1);
+            var grupos = this.GetGrupos().Where(g => g.Usuarios.Any(u => u.Id == id));
             return grupos;
         }
 

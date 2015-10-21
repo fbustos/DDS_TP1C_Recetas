@@ -15,10 +15,12 @@ namespace DDS.Controllers
     public class GrupoController : BaseController
     {
         private readonly IGrupoService grupoService;
+        private readonly IUsuarioService usuarioService;
 
-        public GrupoController(IGrupoService grupoService)
+        public GrupoController(IGrupoService grupoService, IUsuarioService usuarioService)
         {
             this.grupoService = grupoService;
+            this.usuarioService = usuarioService;
         }
 
         // GET: Grupo/MisGrupos
@@ -52,10 +54,9 @@ namespace DDS.Controllers
                 {
 
                     var grupo = Mapper.Map<GrupoViewModel, Grupo>(model);
-                    grupoService.CreateGrupo(grupo);
                     grupo.CreadoPor = Current.User.Id;
-                    grupo.Usuarios = new List<Usuario>();
-                    grupo.Usuarios.Add(Current.User);
+                    grupo.Usuarios = new List<Usuario> { usuarioService.GetByUsername(Current.User.Username) };
+                    grupoService.CreateGrupo(grupo);
                     grupoService.SaveGrupo();
                     TempData["SuccessMessage"] = string.Format("Grupo '{0}' fue creado correctamente.", grupo.Nombre);
                 }
