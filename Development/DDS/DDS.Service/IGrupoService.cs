@@ -12,9 +12,12 @@ namespace DDS.Service
     {
         IEnumerable<Grupo> GetGrupos();
         IEnumerable<Grupo> GetGruposByUserId(int id);
+        IEnumerable<Grupo> GetGruposPorUsuarioUnido(int id);
         Grupo GetGrupo(int id);
         void CreateGrupo(Grupo grupo);
         void UpdateGrupo(Grupo grupo);
         void SaveGrupo();
+
+        void DeleteGrupo(Grupo grupo);
     }
 }
