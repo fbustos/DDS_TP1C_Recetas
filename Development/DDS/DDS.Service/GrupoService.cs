@@ -28,6 +28,12 @@ namespace DDS.Service
             return grupos;
         }
 
+        public IEnumerable<Grupo> GetGruposPorUsuarioUnido(int id)
+        {
+            var grupos = this.GetGrupos().Where(g => g.Usuarios.Any(u => u.Id == id));
+            return grupos;
+        }
+
         public IEnumerable<Grupo> GetGruposByUserId(int id)
         {
             var grupos = this.GetGrupos().Where(g => g.CreadoPor == id);
@@ -48,13 +54,22 @@ namespace DDS.Service
 
         public void UpdateGrupo(Grupo grupo)
         {
-            grupo.FechaModificacion = DateTime.Now;
-            grupoRepository.Update(grupo);
+            var elGrupo = this.GetGrupo(grupo.Id);
+            elGrupo.Nombre = grupo.Nombre;
+            elGrupo.Descripcion = grupo.Descripcion;
+            elGrupo.FechaModificacion = DateTime.Now;
+            
+            grupoRepository.Update(elGrupo);
         }
 
         public void SaveGrupo()
         {
             unitOfWork.Commit();
+        }
+
+        public void DeleteGrupo(Grupo grupo)
+        {
+            grupoRepository.Delete(grupo);
         }
 
         #endregion

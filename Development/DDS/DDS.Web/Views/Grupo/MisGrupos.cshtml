@@ -1,14 +1,14 @@
 ﻿@model IList<DDS.Models.ViewModels.GrupoViewModel>
 
 @{
-    ViewBag.Title = "Mis Grupos";
+    ViewBag.Title = "Administrar mis grupos";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h2>Mis Grupos</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo grupo", "Create")
 </p>
 <table id="misGrupos" class="table">
     <thead>
@@ -49,7 +49,7 @@
     $(document).ready(function () {
         $("#misGrupos").dataTable({
             "language": {
-                "emptyTable": "Usted no pertenece a ningún Grupo",
+                "emptyTable": "Usted no creo ningún Grupo",
                 "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
                 "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
                 "infoFiltered": "(filtrado de _MAX_ total entradas)",

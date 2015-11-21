@@ -15,10 +15,12 @@ namespace DDS.Controllers
     public class GrupoController : BaseController
     {
         private readonly IGrupoService grupoService;
+        private readonly IUsuarioService usuarioService;
 
-        public GrupoController(IGrupoService grupoService)
+        public GrupoController(IGrupoService grupoService, IUsuarioService usuarioService)
         {
             this.grupoService = grupoService;
+            this.usuarioService = usuarioService;
         }
 
         // GET: Grupo/MisGrupos
@@ -29,15 +31,37 @@ namespace DDS.Controllers
             return View(model);
         }
 
+        public ActionResult VerGrupos()
+        {
+            var grupos = this.grupoService.GetGruposPorUsuarioUnido(this.Current.User.Id);
+            var model = Mapper.Map<IEnumerable<Grupo>, IList<GrupoViewModel>>(grupos);
+            return View(model);
+        }
+
+        // GET: Grupo/Create
+        public ActionResult Create()
+        {
+            return View(new GrupoViewModel());
+        }
+
         // POST: Grupo/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(GrupoViewModel model)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
 
-                return RedirectToAction("Index");
+                    var grupo = Mapper.Map<GrupoViewModel, Grupo>(model);
+                    grupo.CreadoPor = Current.User.Id;
+                    grupo.Usuarios = new List<Usuario> { usuarioService.GetByUsername(Current.User.Username) };
+                    grupoService.CreateGrupo(grupo);
+                    grupoService.SaveGrupo();
+                    TempData["SuccessMessage"] = string.Format("Grupo '{0}' fue creado correctamente.", grupo.Nombre);
+                }
+
+                return View(model);
             }
             catch
             {
@@ -48,45 +72,42 @@ namespace DDS.Controllers
         // GET: Grupo/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var grupo = Mapper.Map<Grupo, GrupoViewModel>(grupoService.GetGrupo(id));
+            return View(grupo);
         }
 
         // POST: Grupo/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, GrupoViewModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
 
-                return RedirectToAction("Index");
+                    var grupo = Mapper.Map<GrupoViewModel, Grupo>(model);
+                    grupoService.UpdateGrupo(grupo);
+                    grupoService.SaveGrupo();
+                    TempData["SuccessMessage"] = string.Format("Grupo '{0}' fue modificado correctamente.", grupo.Nombre);
+                }
+
+                return View(model);
             }
             catch
             {
                 return View();
             }
         }
+
 
         // GET: Grupo/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
+            var grupo = grupoService.GetGrupo(id);
+            grupoService.DeleteGrupo(grupo);
+            grupoService.SaveGrupo();
 
-        // POST: Grupo/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("MisGrupos");
         }
 
         // GET: Grupo/Delete/5
