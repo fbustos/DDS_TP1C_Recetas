@@ -39,12 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRecetaService.cs" />
     <Compile Include="IGrupoService.cs" />
+    <Compile Include="IRecetaService.cs" />
     <Compile Include="IUsuarioService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecetaService.cs" />
     <Compile Include="GrupoService.cs" />
+    <Compile Include="RecetaService.cs" />
     <Compile Include="UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup>
