@@ -40,6 +40,12 @@ namespace DDS.Service
             return grupos;
         }
 
+        public IEnumerable<Grupo> GetGruposByName(string nombre, int idUser)
+        {
+            var grupos = this.GetGrupos().Where(g => g.Nombre.ToLower().IndexOf(nombre.ToLower()) > -1 && g.CreadoPor!=idUser && !g.Usuarios.Any(h => h.Id==idUser));
+            return grupos;
+        }
+
         public Grupo GetGrupo(int id)
         {
             var grupo = grupoRepository.GetById(id);

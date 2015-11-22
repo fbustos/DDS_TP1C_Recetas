@@ -218,6 +218,7 @@
     <Content Include="Views\Grupo\Create.cshtml" />
     <Content Include="Views\Grupo\Edit.cshtml" />
     <Content Include="Views\Grupo\Delete.cshtml" />
+    <Content Include="Views\Grupo\Buscar.cshtml" />
     <Content Include="Views\Grupo\VerGrupos.cshtml" />
   </ItemGroup>
   <ItemGroup>

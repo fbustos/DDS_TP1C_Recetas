@@ -110,10 +110,46 @@ namespace DDS.Controllers
             return RedirectToAction("MisGrupos");
         }
 
+        public ActionResult Abandonar(int id)
+        {
+            var grupo = grupoService.GetGrupo(id);
+            if (grupo.CreadoPor == this.Current.User.Id)
+            {
+                return Delete(id);
+            }
+            else
+            {
+                grupo.Usuarios.Remove(grupo.Usuarios.First(g => g.Id == this.Current.User.Id));
+                grupoService.UpdateGrupo(grupo);
+                grupoService.SaveGrupo();
+                return RedirectToAction("VerGrupos");
+            }
+        }
+
+        public ActionResult Unirme(int id)
+        {
+            var grupo = grupoService.GetGrupo(id);
+            if (grupo.CreadoPor != this.Current.User.Id && !grupo.Usuarios.Any(g => g.Id==this.Current.User.Id))
+            {
+                grupo.Usuarios.Add(usuarioService.GetUsuario(this.Current.User.Id));
+                grupoService.UpdateGrupo(grupo);
+                grupoService.SaveGrupo();
+            }
+
+            return RedirectToAction("Buscar");
+        }
+
         // GET: Grupo/Delete/5
         public ActionResult Details(int id)
         {
             return View();
+        }
+
+        public ActionResult Buscar()
+        {
+            var grupos = this.grupoService.GetGruposByName("", this.Current.User.Id);
+            var model = Mapper.Map<IEnumerable<Grupo>, IList<GrupoViewModel>>(grupos);
+            return View(model);
         }
     }
 }
