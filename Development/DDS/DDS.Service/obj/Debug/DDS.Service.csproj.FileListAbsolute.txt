@@ -20,3 +20,14 @@ D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\bin\Debug\EntityFramework.x
 D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\obj\Debug\DDS.Service.csprojResolveAssemblyReference.cache
 D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\obj\Debug\DDS.Service.dll
 D:\Trabajo\Proyectos\DDS\Development\DDS\DDS.Service\obj\Debug\DDS.Service.pdb
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Service.dll
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Service.pdb
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Data.dll
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Model.dll
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\EntityFramework.dll
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Data.pdb
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\DDS.Model.pdb
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\bin\Debug\EntityFramework.xml
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\obj\Debug\DDS.Service.csprojResolveAssemblyReference.cache
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\obj\Debug\DDS.Service.dll
+C:\Users\JBM\Source\Repos\DDS_TP1C_Recetas\Development\DDS\DDS.Service\obj\Debug\DDS.Service.pdb
