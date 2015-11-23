@@ -19,7 +19,7 @@ namespace DDS.Web.Mappings
         protected override void Configure()
         {
             Mapper.CreateMap<PerfilViewModel, Perfil>();
-            Mapper.CreateMap<CargarRecetaViewModel, Receta>();
+            Mapper.CreateMap<RecetaViewModel, Receta>();
             Mapper.CreateMap<GrupoViewModel, Grupo>();
         }
     }

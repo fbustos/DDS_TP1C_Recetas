@@ -24,12 +24,12 @@ namespace DDS.Controllers
 
         // POST: Receta/Create
         [HttpPost]
-        public ActionResult CargarReceta(CargarRecetaViewModel model)
+        public ActionResult CargarReceta(RecetaViewModel model)
         {
             if (ModelState.IsValid)
             {
 
-                var receta = Mapper.Map<CargarRecetaViewModel, Receta>(model);
+                var receta = Mapper.Map<RecetaViewModel, Receta>(model);
                 recetaService.CreateReceta(receta);
                 recetaService.SaveReceta();
                 TempData["SuccessMessage"] = string.Format("Receta '{0}' cargado correctamente.", receta.Nombre);

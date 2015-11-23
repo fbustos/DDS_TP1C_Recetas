@@ -1,6 +1,6 @@
-﻿@model DDS.Models.ViewModels.CargarRecetaViewModel
+﻿@model DDS.Models.ViewModels.RecetaViewModel
 @{
-    ViewBag.Title = "Cargar Receta";
+    ViewBag.Title = "Crear Receta";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
@@ -41,12 +41,75 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Calorias, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Calorias, new { @class = "form-control"})
+                        @Html.TextBoxFor(m => m.Calorias, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
+                    @Html.Label("Categorias", new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(x => x.Desayuno)
+                        @Html.LabelFor(x => x.Desayuno)
+                        @Html.CheckBoxFor(x => x.Almuerzo)
+                        @Html.LabelFor(x => x.Almuerzo)
+                        @Html.CheckBoxFor(x => x.Merienda)
+                        @Html.LabelFor(x => x.Merienda)
+                        @Html.CheckBoxFor(x => x.Cena)
+                        @Html.LabelFor(x => x.Cena)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h3>Ingredientes</h3>
+                    <table id="tblIngredientes" class="table dataTable table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Cantidad de Porciones</th>
+                                <th>Calorias x porción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Ingredientes.Any())
+                            {
+                                foreach (var ing in Model.Ingredientes)
+                                {
+                                    <tr>
+                                        <td>@ing.Nombre</td>
+                                        <td>@ing.Porcion</td>
+                                        <td>@ing.CaloriasPorcion</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <button id="btnAgregarIngredientes" type="button" class="btn btn-default">Agregar Ingredientes</button>
+                </div>
+                <div class="form-group">
+                    <h3>Condimentos</h3>
+                    <table id="tblCondimentos" class="table dataTable table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Condimentos.Any())
+                            {
+                                foreach (var con in Model.Condimentos)
+                                {
+                                    <tr>
+                                        <td>@con.Nombre</td>
+                                        <td>@con.Tipo</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <button id="btnAgregarCondimentos" type="button" class="btn btn-default">Agregar Condimentos</button>
+                </div>
+                <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Registrar" class="btn btn-primary" />
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
                         <input type="button" value="Volver" class="btn btn-default" onclick="window.location.href='@Url.Action("CargarReceta")'" />
                     </div>
                 </div>
@@ -54,3 +117,34 @@
         </section>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        var data = {
+            "emptyTable": "No ha agregado items a la tabla",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+            "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+            "infoFiltered": "(filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "No se encontraron registros",
+            "paginate": {
+                "first": "Primer",
+                "last": "Ultima",
+                "next": "Siguiente",
+                "previous": "Previa"
+            }
+        };
+
+        $("#tblIngredientes #tblCondimentos").dataTable({
+            "language": data,
+            "bFilter": false,
+            "bInfo": false,
+            "bPaginate": false,
+        });
+    });
+</script>

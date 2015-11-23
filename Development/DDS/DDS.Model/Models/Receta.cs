@@ -19,6 +19,20 @@ namespace DDS.Model.Models
 
         public int Calorias { get; set; }
 
+        public bool Desayuno { get; set; }
+
+        public bool Almuerzo { get; set; }
+
+        public bool Merienda { get; set; }
+
+        public bool Cena { get; set; }
+
+        public virtual IList<Ingrediente> Ingredientes { get; set; }
+
+        public virtual IList<Condimento> Condimentos { get; set; }
+
+        public virtual IList<Paso> Pasos { get; set; }
+
         public DateTime FechaCreacion { get; set; }
 
         public DateTime? FechaUltimaModificacion { get; set; }

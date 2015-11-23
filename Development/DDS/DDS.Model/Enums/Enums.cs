@@ -64,4 +64,12 @@ namespace DDS.Model.Enums
         Invierno = 3,
         Primavera = 4
     }
+
+    public enum Categoria
+    {
+        Desayuno = 1,
+        Almuerzo,
+        Merienda,
+        Cena
+    }
 }
