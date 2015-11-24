@@ -21,6 +21,7 @@ namespace DDS.Web.Mappings
             Mapper.CreateMap<PerfilViewModel, Perfil>();
             Mapper.CreateMap<RecetaViewModel, Receta>();
             Mapper.CreateMap<GrupoViewModel, Grupo>();
+            Mapper.CreateMap<PasoViewModel, Paso>();
         }
     }
 }

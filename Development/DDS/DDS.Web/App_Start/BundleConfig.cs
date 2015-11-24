@@ -36,6 +36,9 @@ namespace DDS
             bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
                       "~/Scripts/bootstrap-datepicker.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/filestyle").Include(
+                "~/Scripts/bootstrap-filestyle.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/datepicker/css").Include(
                       "~/Content/datepicker.css"));
 

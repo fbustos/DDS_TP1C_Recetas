@@ -73,3 +73,14 @@ h4{
 .alert-success{
     text-align:center;
 }
+
+.ImgPreview {
+    height: 250px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: rgb(216, 216, 216);
+    background-repeat: repeat;
+    -ms-background-size: 100% 100%;
+    background-size: 100% 100%;
+    border:solid 1px #ccc;
+}
