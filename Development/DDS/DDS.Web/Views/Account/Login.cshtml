@@ -6,34 +6,42 @@
 
 <h2>@ViewBag.Title</h2>
 <div class="row">
+    <div class="col-md-2"></div>
     <div class="col-md-8">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <hr />
+
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.Username, new { @class = "col-md-5 control-label" })
+                    <div class="col-md-7">
                         @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-5 control-label" })
+                    <div class="col-md-7">
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Iniciar Sesión" class="btn btn-default" />
+                    <div class="col-md-offset-5 col-md-10">
+                        <input type="submit" value="Iniciar Sesión" class="btn btn-default bt-gris" />
                     </div>
                 </div>
-                <p>
-                    @Html.ActionLink("Registrar un nuevo usuario", "Register")
-                </p>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-10">
+                        <p>
+                            @Html.ActionLink("Registrar un nuevo usuario", "Register")
+                        </p>
+                    </div>
+                </div>
+                
             }
         </section>
     </div>
+    <div class="col-md-2"></div>
 </div>

@@ -1,6 +1,31 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url('../../Content/images/byn.png');
+
+
+}
+
+h2{
+    display:block;
+    text-align:center;
+    text-decoration: underline;
+    width:100%;
+    padding: 15px;
+    background-color: #DCDDDE;
+    border: 4px solid grey;
+}
+
+footer{
+    width:100%;
+    padding:20px;
+    background-color: #333333;
+    color:#BDBDBD;
+    text-align:center;
+}
+
+p{
+    margin: 0 !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -14,4 +39,37 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+section{
+    padding: 15px;
+    background-color: #DCDDDE;
+}
+
+.bienvenido{
+    text-align:center;
+}
+
+.bt-gris{
+    background-color: grey;
+    color: #DCDDDE;
+    border: none;
+}
+
+th{
+    border-bottom:  2px solid grey !important;
+}
+
+table{
+    border-bottom:  2px solid grey !important;
+}
+
+h4{
+    display:block;
+    width:100%;
+    text-align:center;
+}
+
+.alert-success{
+    text-align:center;
 }
