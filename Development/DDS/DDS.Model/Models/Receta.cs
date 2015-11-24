@@ -33,6 +33,8 @@ namespace DDS.Model.Models
 
         public virtual IList<Paso> Pasos { get; set; }
 
+        public virtual Usuario CreadaPor { get; set; }
+
         public DateTime FechaCreacion { get; set; }
 
         public DateTime? FechaUltimaModificacion { get; set; }

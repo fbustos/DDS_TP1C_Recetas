@@ -24,7 +24,9 @@ namespace DDS.Model.Models
 
         public DateTime? FechaUltimaModificacion { get; set; }
 
-        public IList<Grupo> Grupos { get; set; }
+        public virtual IList<Grupo> Grupos { get; set; }
+
+        public virtual IList<Receta> MisRecetas { get; set; } 
 
         public void SetPassword(string password)
         {

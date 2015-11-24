@@ -1,6 +1,6 @@
 ﻿@model DDS.Models.ViewModels.RecetaViewModel
 @{
-    ViewBag.Title = "Crear Receta";
+    ViewBag.Title = "Cargar Receta";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
@@ -8,8 +8,12 @@
 <div class="row">
     <div class="col-md-8">
         <section id="ResgistroForm">
-            @using (Html.BeginForm("CargarReceta", "Receta", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("CargarReceta", "Receta", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "cargarRecetasForm" }))
             {
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.IngredientesSeleccionados)
+                @Html.HiddenFor(m => m.CondimentosSeleccionados)
+
                 @Html.AntiForgeryToken()
                 <h4>Debe completar los campos obligatorios.</h4>
                 <hr />
@@ -59,57 +63,81 @@
                 </div>
                 <div class="form-group">
                     <h3>Ingredientes</h3>
+                    <div class="col-md-10">
+                        @Html.Label("Ingrediente", new { @class = "col-md-2 control-label" })
+
+                        @Html.DropDownList("ddlIngredientes", Model.IngredientesDisponibles.Select(x => new SelectListItem
+                        {
+                            Text = x.Nombre + " - " + x.Porcion + " Porcion/es - " + x.CaloriasPorcion + " Cal",
+                            Value = x.Id.ToString(),
+                            Selected = false
+                        }), "Seleccione un Ingrediente", new { @class = "form-control" })
+                    </div>
+                    <button id="btnAgregarIngredientes" type="button" class="btn btn-primary">Agregar</button>
                     <table id="tblIngredientes" class="table dataTable table-bordered table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Cantidad de Porciones</th>
                                 <th>Calorias x porción</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model != null && Model.Ingredientes.Any())
+                            @if (Model != null && Model.Ingredientes != null && Model.Ingredientes.Any())
                             {
                                 foreach (var ing in Model.Ingredientes)
                                 {
-                                    <tr>
+                                    <tr data-id="@ing.Id">
                                         <td>@ing.Nombre</td>
                                         <td>@ing.Porcion</td>
                                         <td>@ing.CaloriasPorcion</td>
+                                        <td><a href="#" onclick="return eliminarIngrediente(@ing.Id);">Eliminar</a></td>
                                     </tr>
                                 }
                             }
                         </tbody>
                     </table>
-                    <button id="btnAgregarIngredientes" type="button" class="btn btn-default">Agregar Ingredientes</button>
                 </div>
                 <div class="form-group">
                     <h3>Condimentos</h3>
+                    <div class="col-md-10">
+                        @Html.Label("Condimento", new { @class = "col-md-2 control-label" })
+
+                        @Html.DropDownList("ddlCondimentos", Model.CondimentosDisponibles.Select(x => new SelectListItem
+                        {
+                            Text = x.Nombre + " - " + x.Tipo,
+                            Value = x.Id.ToString(),
+                            Selected = false
+                        }), "Seleccione un Condimento", new { @class = "form-control" })
+                    </div>
+                    <button id="btnAgregarCondimentos" type="button" class="btn btn-primary">Agregar</button>
                     <table id="tblCondimentos" class="table dataTable table-bordered table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Tipo</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model != null && Model.Condimentos.Any())
+                            @if (Model != null && Model.Condimentos != null && Model.Condimentos.Any())
                             {
                                 foreach (var con in Model.Condimentos)
                                 {
-                                    <tr>
+                                    <tr data-id="@con.Id">
                                         <td>@con.Nombre</td>
                                         <td>@con.Tipo</td>
+                                        <td><a href="#" onclick="return eliminarCondimento(@con.Id);">Eliminar</a></td>
                                     </tr>
                                 }
                             }
                         </tbody>
                     </table>
-                    <button id="btnAgregarCondimentos" type="button" class="btn btn-default">Agregar Condimentos</button>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        <input id="btnGuardar" type="button" value="Guardar y Continuar" class="btn btn-primary" />
                         <input type="button" value="Volver" class="btn btn-default" onclick="window.location.href='@Url.Action("CargarReceta")'" />
                     </div>
                 </div>
@@ -146,5 +174,61 @@
             "bInfo": false,
             "bPaginate": false,
         });
+
+        $("#btnAgregarIngredientes").click(function () {
+            var value = $("#ddlIngredientes").val();
+            var list = $("#ddlIngredientes option:selected").text().split(' - ');
+            var nombre = list[0];
+            var cantPorcion = list[1].substr(0, list[1].length - 11);
+            var cal = list[2].substr(0, list[2].length - 4);
+            $('#tblIngredientes > tbody:last-child').append('<tr data-id=' + value + '>' +
+                '<td>' + nombre + '</td>' +
+                '<td>' + cantPorcion + '</td>' +
+                '<td>' + cal + '</td>' +
+                '<td><a href="#" onclick="return eliminarIngrediente(' + value + ');">Eliminar</a></td>' +
+                '</tr>');
+        });
+
+        $("#btnAgregarCondimentos").click(function () {
+            var value = $("#ddlCondimentos").val();
+            var list = $("#ddlCondimentos option:selected").text().split(' - ');
+            var nombre = list[0];
+            var tipo = list[1];
+            $('#tblCondimentos > tbody:last-child').append('<tr data-id=' + value + '>' +
+                '<td>' + nombre + '</td>' +
+                '<td>' + tipo + '</td>' +
+                '<td><a href="#" onclick="return eliminarCondimento(' + value + ');">Eliminar</a></td>' +
+                '</tr>');
+        });
+
+        $("#btnGuardar").click(function () {
+            var ids = [];
+            var rows = $("#tblIngredientes tbody tr");
+            $(rows).each(function(index, item) {
+                ids.push($(item).data("id"));
+            });
+
+            $("#IngredientesSeleccionados").val(ids.join(","));
+
+            ids = [];
+            rows = $("#tblCondimentos tbody tr");
+            $(rows).each(function (index, item) {
+                ids.push($(item).data("id"));
+            });
+
+            $("#CondimentosSeleccionados").val(ids.join(","));
+
+            $("#cargarRecetasForm").submit();
+        });
     });
+
+    function eliminarIngrediente(id) {
+        $('#tblIngredientes tr[data-id="' + id + '"]').remove();
+        return false;
+    }
+
+    function eliminarCondimento(id) {
+        $('#tblCondimentos tr[data-id="' + id + '"]').remove();
+        return false;
+    }
 </script>

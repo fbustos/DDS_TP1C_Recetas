@@ -1,24 +1,24 @@
-﻿using DDS.Data.Infrastructure;
+﻿using System.Linq;
+using DDS.Data.Infrastructure;
 using DDS.Data.Interfaces;
 using DDS.Model.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DDS.Service
 {
     public class RecetaService : IRecetaService
     {
         private readonly IRecetaRepository recetasRepository;
-        //private readonly ICategoryRepository categoryRepository;
+        private readonly IIngredienteRepository ingredienteRepository;
+        private readonly ICondimentoRepository condimentoRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public RecetaService(IRecetaRepository recetasRepository, /*ICategoryRepository categoryRepository,*/ IUnitOfWork unitOfWork)
+        public RecetaService(IRecetaRepository recetasRepository, IIngredienteRepository ingredienteRepository, ICondimentoRepository condimentoRepository, IUnitOfWork unitOfWork)
         {
             this.recetasRepository = recetasRepository;
-            //this.categoryRepository = categoryRepository;
+            this.ingredienteRepository = ingredienteRepository;
+            this.condimentoRepository = condimentoRepository;
             this.unitOfWork = unitOfWork;
         }
 
@@ -29,12 +29,6 @@ namespace DDS.Service
             var recetas = recetasRepository.GetAll();
             return recetas;
         }
-
-        //public IEnumerable<Usuario> GetCategoryUsuarios(string categoryName, string usuarioName = null)
-        //{
-        //    var category = categoryRepository.GetCategoryByName(categoryName);
-        //    return category.Usuarios.Where(g => g.Name.ToLower().Contains(usuarioName.ToLower().Trim()));
-        //}
 
         public Receta GetReceta(int id)
         {
@@ -57,6 +51,26 @@ namespace DDS.Service
         public void SaveReceta()
         {
             unitOfWork.Commit();
+        }
+
+        public IList<Ingrediente> GetIngredientes()
+        {
+            return this.ingredienteRepository.GetAll().ToList();
+        }
+
+        public IList<Condimento> GetCondimentos()
+        {
+            return this.condimentoRepository.GetAll().ToList();
+        }
+
+        public Ingrediente GetIngredienteById(int id)
+        {
+            return this.ingredienteRepository.GetById(id);
+        }
+
+        public Condimento GetCondimentoById(int id)
+        {
+            return this.condimentoRepository.GetById(id);
         }
 
         #endregion

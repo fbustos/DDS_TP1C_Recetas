@@ -47,6 +47,10 @@ namespace DDS.Data.Configuration
                     m.MapRightKey("PasoId");
                     m.ToTable("RecetasPasos");
                 });
+
+            HasRequired(x => x.CreadaPor)
+                .WithMany()
+                .Map(p => p.MapKey("UsuarioId"));
         }
     }
 }

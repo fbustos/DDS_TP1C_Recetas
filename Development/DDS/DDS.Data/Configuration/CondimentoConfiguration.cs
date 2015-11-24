@@ -15,8 +15,8 @@ namespace DDS.Data.Configuration
         {
             ToTable("Condimentos").HasKey(u => u.Id);
             Property(u => u.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(u => u.Nombre).IsOptional();
-            Property(u => u.Tipo).IsOptional();
+            Property(u => u.Nombre).IsRequired();
+            Property(u => u.Tipo).IsRequired();
         }
     }
 }

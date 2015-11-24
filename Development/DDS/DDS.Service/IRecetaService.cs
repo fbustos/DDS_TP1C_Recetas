@@ -11,11 +11,13 @@ namespace DDS.Service
     public interface IRecetaService
     {
         IEnumerable<Receta> GetRecetas();
-        //IEnumerable<Usuario> GetCategoryUsuarios(string categoryName, string usuarioName = null);
         Receta GetReceta(int id);
         void CreateReceta(Receta receta);
         void SaveReceta();
-
         void UpdateReceta(Receta receta);
+        IList<Ingrediente> GetIngredientes();
+        IList<Condimento> GetCondimentos();
+        Ingrediente GetIngredienteById(int id);
+        Condimento GetCondimentoById(int id);
     }
 }

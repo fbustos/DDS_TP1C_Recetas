@@ -11,7 +11,7 @@ namespace DDS.Model.Models
 
         public string Nombre { get; set; }
 
-        public int Tipo { get; set; }
+        public string Tipo { get; set; }
 
         public virtual IList<Receta> Recetas { get; set; }
     }

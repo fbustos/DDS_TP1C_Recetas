@@ -7,6 +7,8 @@ namespace DDS.Models.ViewModels
 {
     public class RecetaViewModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Debe completar el Nombre.")]
         public string Nombre { get; set; }
 
@@ -27,8 +29,16 @@ namespace DDS.Models.ViewModels
 
         public bool Cena { get; set; }
 
+        public string IngredientesSeleccionados { get; set; }
+
+        public string CondimentosSeleccionados { get; set; }
+
         public IList<Ingrediente> Ingredientes { get; set; }
 
+        public IList<Ingrediente> IngredientesDisponibles { get; set; }
+
         public IList<Condimento> Condimentos { get; set; }
+
+        public IList<Condimento> CondimentosDisponibles { get; set; }
     }
 }
