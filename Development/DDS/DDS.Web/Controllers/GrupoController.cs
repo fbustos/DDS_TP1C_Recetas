@@ -139,15 +139,17 @@ namespace DDS.Controllers
             return RedirectToAction("Buscar");
         }
 
-        // GET: Grupo/Delete/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         public ActionResult Buscar()
         {
             var grupos = this.grupoService.GetGruposByName("", this.Current.User.Id);
+            var model = Mapper.Map<IEnumerable<Grupo>, IList<GrupoViewModel>>(grupos);
+            return View(model);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var grupos = this.grupoService.GetGruposPorUsuarioUnido(this.Current.User.Id);
             var model = Mapper.Map<IEnumerable<Grupo>, IList<GrupoViewModel>>(grupos);
             return View(model);
         }

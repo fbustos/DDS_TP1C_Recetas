@@ -6,6 +6,7 @@
 
 <h2>@ViewBag.Title</h2>
 <div class="row">
+    <div class="col-md-2"></div>
     <div class="col-md-8">
         <section id="ResgistroForm">
             @using (Html.BeginForm("Create", "Grupo", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -21,25 +22,26 @@
                     </div>
                 }
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.Nombre, new { @class = "col-md-5 control-label" })
+                    <div class="col-md-7">
                         @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Descripcion, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.Descripcion, new { @class = "col-md-5 control-label" })
+                    <div class="col-md-7">
                         @Html.TextAreaFor(m => m.Descripcion, new { @class = "form-control" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Crear" class="btn btn-primary" />
+                    <div class="col-md-offset-5 col-md-7">
+                        <input type="submit" value="Crear" class="btn btn-primary bt-gris" />
                         <input type="button" value="Volver" class="btn btn-default" onclick="window.location.href='@Url.Action("MisGrupos", "Grupo")'" />
                     </div>
                 </div>
             }
         </section>
     </div>
+    <div class="col-md-2"></div>
 </div>
