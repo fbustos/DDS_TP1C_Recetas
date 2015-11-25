@@ -124,7 +124,11 @@ namespace DDS.Controllers
 
         private void IniciarSesion(Usuario usuario)
         {
-            string userData = JsonConvert.SerializeObject(usuario);
+            string userData = JsonConvert.SerializeObject(usuario, Formatting.Indented,
+                            new JsonSerializerSettings
+                            {
+                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                            });
             var authTicket = new FormsAuthenticationTicket(
                      1,
                      usuario.Username,

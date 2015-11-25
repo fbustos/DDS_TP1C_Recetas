@@ -47,7 +47,6 @@ namespace DDS.Controllers
         [HttpPost]
         public ActionResult CargarReceta(RecetaViewModel model)
         {
-            int? id = null;
             if (ModelState.IsValid)
             {
                 var receta = Mapper.Map<RecetaViewModel, Receta>(model);
@@ -76,10 +75,14 @@ namespace DDS.Controllers
                 }
 
                 recetaService.SaveReceta();
-                id = receta.Id;
                 TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", receta.Nombre);
+                
+                return RedirectToAction("_CargarPaso", new { recetaId = receta.Id, nroPaso = 0 });
             }
-            return RedirectToAction("_CargarPaso", new { recetaId = id, nroPaso = 0 });
+
+            model.IngredientesDisponibles = this.recetaService.GetIngredientes();
+            model.CondimentosDisponibles = this.recetaService.GetCondimentos();
+            return View(model);
         }
 
         public ActionResult _CargarPaso(int recetaId, int nroPaso)
@@ -98,6 +101,14 @@ namespace DDS.Controllers
 
             model.Numero = nroPaso;
             model.RecetaId = recetaId;
+            if (nroPaso == 0)
+            {
+                TempData["BotonVolver"] = Url.Action("CargarReceta", new { id = recetaId });
+            }
+            else
+            {
+                TempData["BotonVolver"] = Url.Action("_CargarPaso", new { recetaId, nroPaso = (nroPaso - 1) });
+            }
 
             return PartialView(model);
         }
@@ -106,7 +117,7 @@ namespace DDS.Controllers
         public ActionResult _CargarPaso(PasoViewModel model)
         {
             var paso = Mapper.Map<PasoViewModel, Paso>(model);
-            paso.ImagenPath = this.GuardarImagen(model);
+            paso.ImagenPath = model.Imagen != null ? this.GuardarImagen(model) : model.ImagenPath;
             var receta = this.recetaService.GetReceta(model.RecetaId);
             if (model.Id == 0)
             {
@@ -118,6 +129,7 @@ namespace DDS.Controllers
             {
                 var pasoBd = pasoService.Get(model.Id);
                 pasoService.Delete(pasoBd);
+                paso.Receta = receta;
                 pasoService.Create(paso);
                 pasoService.Save();
             }

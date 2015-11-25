@@ -70,8 +70,15 @@ h4{
     text-align:center;
 }
 
-.alert-success{
+.alert-success {
     text-align:center;
+    margin: 15px 0 15px 0;
+    padding: 10px 0 10px 0;
+}
+
+.text-danger {
+    color: #b94a48;
+    background-color: antiquewhite;
 }
 
 .ImgPreview {
