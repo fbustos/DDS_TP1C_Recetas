@@ -26,7 +26,9 @@ namespace DDS.Model.Models
 
         public virtual IList<Grupo> Grupos { get; set; }
 
-        public virtual IList<Receta> MisRecetas { get; set; } 
+        public virtual IList<Receta> MisRecetas { get; set; }
+
+        public virtual IList<UsuarioReceta> UsuarioRecetas { get; set; }
 
         public void SetPassword(string password)
         {

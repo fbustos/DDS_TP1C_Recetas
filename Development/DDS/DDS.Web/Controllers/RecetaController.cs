@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Web.Hosting;
 using System.Web.Routing;
+using Antlr.Runtime.Misc;
 using AutoMapper;
 using DDS.Model.Models;
 using DDS.Models.ViewModels;
@@ -26,6 +27,8 @@ namespace DDS.Controllers
             this.usuarioService = usuarioService;
             this.pasoService = pasoService;
         }
+
+        #region Cargar Receta
 
         public ActionResult CargarReceta(int? id = null)
         {
@@ -142,6 +145,34 @@ namespace DDS.Controllers
 
             TempData["SuccessMessage"] = string.Format("Se han cargado todos los pasos correctamente");
             return RedirectToAction("CargarReceta", new {id = model.RecetaId});
+        }
+
+        #endregion
+
+        #region Mis Recetas
+
+        // GET: Grupo/MisGrupos
+        public ActionResult MisRecetas()
+        {
+            var recetas = this.recetaService.GetRecetas().Where(r => r.CreadaPor.Id == this.Current.User.Id);
+            var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
+            return View(model);
+        }
+
+        public ActionResult VerRecetas()
+        {
+            return null;
+        }
+
+        #endregion
+
+        public ActionResult Delete(int id)
+        {
+            var receta = recetaService.GetReceta(id);
+            recetaService.DeleteReceta(receta);
+            recetaService.SaveReceta();
+
+            return RedirectToAction("MisRecetas");
         }
 
         private string GetImagePath(PasoViewModel model)

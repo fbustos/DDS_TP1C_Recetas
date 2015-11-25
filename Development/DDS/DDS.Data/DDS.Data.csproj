@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\UsuarioRecetaConfiguration.cs" />
     <Compile Include="Configuration\IngredienteConfiguration.cs" />
     <Compile Include="Configuration\GrupoConfiguration.cs" />
     <Compile Include="Configuration\PasoConfiguration.cs" />

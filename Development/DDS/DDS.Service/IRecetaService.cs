@@ -11,6 +11,7 @@ namespace DDS.Service
         void CreateReceta(Receta receta);
         void SaveReceta();
         void UpdateReceta(Receta receta);
+        void DeleteReceta(Receta receta);
         IList<Ingrediente> GetIngredientes();
         IList<Condimento> GetCondimentos();
         Ingrediente GetIngredienteById(int id);

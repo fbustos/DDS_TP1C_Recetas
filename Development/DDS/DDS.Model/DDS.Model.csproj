@@ -50,6 +50,7 @@
     <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\Receta.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\UsuarioReceta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -48,6 +48,11 @@ namespace DDS.Service
             recetasRepository.Update(receta);
         }
 
+        public void DeleteReceta(Receta receta)
+        {
+            recetasRepository.Delete(receta);
+        }
+
         public void SaveReceta()
         {
             unitOfWork.Commit();
