@@ -227,6 +227,7 @@
     <Content Include="Views\Grupo\VerGrupos.cshtml" />
     <Content Include="Views\Receta\_CargarPaso.cshtml" />
     <Content Include="Views\Receta\MisRecetas.cshtml" />
+    <Content Include="Views\Receta\VerRecetas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DDS.Data\DDS.Data.csproj">

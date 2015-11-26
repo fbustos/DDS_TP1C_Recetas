@@ -161,7 +161,9 @@ namespace DDS.Controllers
 
         public ActionResult VerRecetas()
         {
-            return null;
+            var recetas = this.recetaService.GetRecetasConfirmadas(this.Current.User.Id);
+            var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
+            return View(model);
         }
 
         #endregion

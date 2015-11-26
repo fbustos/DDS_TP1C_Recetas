@@ -12,13 +12,15 @@ namespace DDS.Service
         private readonly IRecetaRepository recetasRepository;
         private readonly IIngredienteRepository ingredienteRepository;
         private readonly ICondimentoRepository condimentoRepository;
+        private readonly IUsuarioRepository usuarioRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public RecetaService(IRecetaRepository recetasRepository, IIngredienteRepository ingredienteRepository, ICondimentoRepository condimentoRepository, IUnitOfWork unitOfWork)
+        public RecetaService(IRecetaRepository recetasRepository, IIngredienteRepository ingredienteRepository, ICondimentoRepository condimentoRepository, IUsuarioRepository usuarioRepository, IUnitOfWork unitOfWork)
         {
             this.recetasRepository = recetasRepository;
             this.ingredienteRepository = ingredienteRepository;
             this.condimentoRepository = condimentoRepository;
+            this.usuarioRepository = usuarioRepository;
             this.unitOfWork = unitOfWork;
         }
 
@@ -28,6 +30,24 @@ namespace DDS.Service
         {
             var recetas = recetasRepository.GetAll();
             return recetas;
+        }
+
+        public IEnumerable<Receta> GetRecetasConfirmadas(int id)
+        {
+            var usuario = usuarioRepository.GetById(id);
+            var recetasConfirmadas = usuario.UsuarioRecetas.Select(r => r.Receta);
+            var recetasGrupos = new List<Receta>();
+            foreach (var grupo in usuario.Grupos)
+            {
+                recetasGrupos = grupo.Usuarios.Where(u => u.Id != usuario.Id)
+                                              .SelectMany(u => u.UsuarioRecetas.Select(r => r.Receta))
+                                              .ToList();
+
+                var misRecetas = grupo.Usuarios.SelectMany(u => u.MisRecetas);
+                recetasGrupos = recetasGrupos.Union(misRecetas).ToList();
+            }
+
+            return recetasConfirmadas.Union(recetasGrupos);
         }
 
         public Receta GetReceta(int id)

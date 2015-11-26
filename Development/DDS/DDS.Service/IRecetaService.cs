@@ -16,5 +16,6 @@ namespace DDS.Service
         IList<Condimento> GetCondimentos();
         Ingrediente GetIngredienteById(int id);
         Condimento GetCondimentoById(int id);
+        IEnumerable<Receta> GetRecetasConfirmadas(int usuario);
     }
 }

@@ -124,6 +124,10 @@ namespace DDS.Controllers
 
         private void IniciarSesion(Usuario usuario)
         {
+            usuario.Grupos = null;
+            usuario.MisRecetas = null;
+            usuario.UsuarioRecetas = null;
+
             string userData = JsonConvert.SerializeObject(usuario, Formatting.Indented,
                             new JsonSerializerSettings
                             {
