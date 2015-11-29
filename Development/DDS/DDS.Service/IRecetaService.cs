@@ -1,9 +1,5 @@
 ﻿using DDS.Model.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DDS.Service
 {
@@ -15,9 +11,11 @@ namespace DDS.Service
         void CreateReceta(Receta receta);
         void SaveReceta();
         void UpdateReceta(Receta receta);
+        void DeleteReceta(Receta receta);
         IList<Ingrediente> GetIngredientes();
         IList<Condimento> GetCondimentos();
         Ingrediente GetIngredienteById(int id);
         Condimento GetCondimentoById(int id);
+        IEnumerable<Receta> GetRecetasConfirmadas(int usuario);
     }
 }

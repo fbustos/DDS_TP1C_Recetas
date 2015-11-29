@@ -25,6 +25,8 @@ namespace DDS.Data.Configuration
             Property(u => u.Cena).IsRequired();
             Property(u => u.FechaCreacion).IsRequired();
             Property(u => u.FechaUltimaModificacion).IsOptional();
+            Property(u => u.TotalVotos).IsOptional();
+            Property(u => u.CantidadVotos).IsOptional();
 
             HasMany(x => x.Ingredientes).WithMany(x => x.Recetas).Map(
                 m =>
@@ -33,6 +35,7 @@ namespace DDS.Data.Configuration
                     m.MapRightKey("IngredienteId");
                     m.ToTable("RecetasIngredientes");
                 });
+
             HasMany(x => x.Condimentos).WithMany(x => x.Recetas).Map(
                 m =>
                 {
@@ -40,17 +43,18 @@ namespace DDS.Data.Configuration
                     m.MapRightKey("CondimentoId");
                     m.ToTable("RecetasCondimentos");
                 });
-            HasMany(x => x.Pasos).WithMany(x => x.Recetas).Map(
-                m =>
-                {
-                    m.MapLeftKey("RecetaId");
-                    m.MapRightKey("PasoId");
-                    m.ToTable("RecetasPasos");
-                });
+
+            HasMany(x => x.Pasos).WithRequired(x => x.Receta)
+                .Map(p => p.MapKey("RecetaId"));
 
             HasRequired(x => x.CreadaPor)
                 .WithMany()
                 .Map(p => p.MapKey("UsuarioId"));
+
+            HasMany(c => c.UsuarioRecetas)
+               .WithRequired(x => x.Receta)
+               .Map(cp => cp.MapKey("RecetaId"))
+               .WillCascadeOnDelete(false);
         }
     }
 }

@@ -22,6 +22,8 @@ footer{
     background-color: #333333;
     color:#BDBDBD;
     text-align:center;
+    position: absolute;
+    bottom: 0;
 }
 
 p{
@@ -70,49 +72,24 @@ h4{
     text-align:center;
 }
 
-.alert-success{
+.alert-success {
     text-align:center;
+    margin: 15px 0 15px 0;
+    padding: 10px 0 10px 0;
 }
 
-.titulo{
-    text-align:center;
-    font-weight: 600;
-    text-decoration:underline;
-    padding: 10px;
-    border-bottom:none !important;
-    font-size: 1.2em;
+.text-danger {
+    color: #b94a48;
+    background-color: antiquewhite;
 }
 
-.usuarios{
-    text-align:center;
-    
-}
-
-.usuarios div{
-    padding: 3px;
-    border-bottom:1px dotted grey;
-}
-
-.usuarios div:last-child{
-    border-bottom:none !important;
-}
-
-.receta-cabecera{
-    text-align:center;
-    font-weight:600;
-    padding:5px;
-}
-
-.receta{
-    text-align:center;
-    padding:3px;
-    border-bottom:1px dotted grey;
-}
-
-.receta:last-child{
-    border-bottom:none !important;
-}
-
-.recetas{
-    border-left: 4px solid grey;
+.ImgPreview {
+    height: 250px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: rgb(216, 216, 216);
+    background-repeat: repeat;
+    -ms-background-size: 100% 100%;
+    background-size: 100% 100%;
+    border:solid 1px #ccc;
 }

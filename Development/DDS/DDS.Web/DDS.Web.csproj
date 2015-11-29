@@ -156,6 +156,7 @@
     <Compile Include="Models\Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Models\Security\CustomPrincipal.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\PasoViewModel.cs" />
     <Compile Include="Models\ViewModels\RecetaViewModel.cs" />
     <Compile Include="Models\ViewModels\GrupoViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
@@ -180,6 +181,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-filestyle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -223,7 +225,9 @@
     <Content Include="Views\Grupo\Delete.cshtml" />
     <Content Include="Views\Grupo\Buscar.cshtml" />
     <Content Include="Views\Grupo\VerGrupos.cshtml" />
-    <Content Include="Views\Grupo\Details.cshtml" />
+    <Content Include="Views\Receta\_CargarPaso.cshtml" />
+    <Content Include="Views\Receta\MisRecetas.cshtml" />
+    <Content Include="Views\Receta\VerRecetas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DDS.Data\DDS.Data.csproj">

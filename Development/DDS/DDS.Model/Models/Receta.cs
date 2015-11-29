@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DDS.Model.Enums;
 
 namespace DDS.Model.Models
@@ -27,6 +24,10 @@ namespace DDS.Model.Models
 
         public bool Cena { get; set; }
 
+        public int CantidadVotos { get; set; }
+
+        public int TotalVotos { get; set; }
+
         public virtual IList<Ingrediente> Ingredientes { get; set; }
 
         public virtual IList<Condimento> Condimentos { get; set; }
@@ -34,6 +35,8 @@ namespace DDS.Model.Models
         public virtual IList<Paso> Pasos { get; set; }
 
         public virtual Usuario CreadaPor { get; set; }
+
+        public virtual IList<UsuarioReceta> UsuarioRecetas { get; set; } 
 
         public DateTime FechaCreacion { get; set; }
 

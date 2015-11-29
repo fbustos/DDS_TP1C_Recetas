@@ -24,8 +24,11 @@ namespace DDS
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include(
+                      "~/Content/bootstrap.min.css", new CssRewriteUrlTransform()));
+
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                       "~/Scripts/datatables.js"));
@@ -35,6 +38,9 @@ namespace DDS
 
             bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
                       "~/Scripts/bootstrap-datepicker.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/filestyle").Include(
+                "~/Scripts/bootstrap-filestyle.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/datepicker/css").Include(
                       "~/Content/datepicker.css"));

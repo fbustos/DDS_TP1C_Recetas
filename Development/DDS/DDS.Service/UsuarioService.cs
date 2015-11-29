@@ -12,13 +12,11 @@ namespace DDS.Service
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository usuariosRepository;
-        //private readonly ICategoryRepository categoryRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public UsuarioService(IUsuarioRepository usuariosRepository, /*ICategoryRepository categoryRepository,*/ IUnitOfWork unitOfWork)
+        public UsuarioService(IUsuarioRepository usuariosRepository, IUnitOfWork unitOfWork)
         {
             this.usuariosRepository = usuariosRepository;
-            //this.categoryRepository = categoryRepository;
             this.unitOfWork = unitOfWork;
         }
 
@@ -29,12 +27,6 @@ namespace DDS.Service
             var usuarios = usuariosRepository.GetAll();
             return usuarios;
         }
-
-        //public IEnumerable<Usuario> GetCategoryUsuarios(string categoryName, string usuarioName = null)
-        //{
-        //    var category = categoryRepository.GetCategoryByName(categoryName);
-        //    return category.Usuarios.Where(g => g.Name.ToLower().Contains(usuarioName.ToLower().Trim()));
-        //}
 
         public Usuario GetUsuario(int id)
         {

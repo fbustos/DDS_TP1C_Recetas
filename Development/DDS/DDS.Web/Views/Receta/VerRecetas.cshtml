@@ -1,0 +1,115 @@
+﻿@model IList<DDS.Models.ViewModels.RecetaViewModel>
+
+@{
+    ViewBag.Title = "Administrar mis Recetas";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<section>
+    <p style="margin:10px 0 !important;">
+        @Html.ActionLink("Crear nueva receta", "CargarReceta")
+    </p>
+    <table id="misRecetas" class="table dataTable table-hover table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Dificultad
+                </th>
+                <th>
+                    Temporada
+                </th>
+                <th>
+                    Calorias
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dificultad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Temporada)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Calorias)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "CargarReceta", new { id = item.Id }) |
+                            <a href="#" class="deleteButton" data-id="@item.Id"
+                               data-confirmation="@string.Format("Está seguro que desea eliminar la receta: {0}?", item.Nombre)">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</section>
+
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">Eliminar Receta</h4>
+            </div>
+            <div class="modal-body nopad3" id="confirmation">
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Delete", "Receta", FormMethod.Post))
+                {
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <input type="hidden" id="id" name="id" value="" />
+                    <button type="submit" class="btn btn-primary" id="btnDelete">Eliminar</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#misRecetas").dataTable({
+            "language": {
+                "emptyTable": "Usted no creo ninguna Receta",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                "infoFiltered": "(filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "No se encontraron registros",
+                "paginate": {
+                    "first": "Primer",
+                    "last": "Ultima",
+                    "next": "Siguiente",
+                    "previous": "Previa"
+                }
+            }
+        });
+
+        $('.deleteButton').click(function () {
+            $("#modalDelete #confirmation").text($(this).data("confirmation"));
+            $("#modalDelete #id").val($(this).data("id"));
+            $('#modalDelete').modal({
+                backdrop: 'static',
+                keyboard: true
+            }, 'show');
+        });
+    });
+</script>

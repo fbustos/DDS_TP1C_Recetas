@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\UsuarioRecetaConfiguration.cs" />
     <Compile Include="Configuration\IngredienteConfiguration.cs" />
     <Compile Include="Configuration\GrupoConfiguration.cs" />
     <Compile Include="Configuration\PasoConfiguration.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Interfaces\ICondimentoRepository.cs" />
+    <Compile Include="Interfaces\IPasoRepository.cs" />
     <Compile Include="Interfaces\IIngredienteRepository.cs" />
     <Compile Include="Interfaces\IRecetaRepository.cs" />
     <Compile Include="Interfaces\IGrupoRepository.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecetasSeedData.cs" />
     <Compile Include="Repositories\CondimentoRepository.cs" />
+    <Compile Include="Repositories\PasoRepository.cs" />
     <Compile Include="Repositories\IngredienteRepository.cs" />
     <Compile Include="Repositories\RecetaRepository.cs" />
     <Compile Include="Repositories\GrupoRepository.cs" />

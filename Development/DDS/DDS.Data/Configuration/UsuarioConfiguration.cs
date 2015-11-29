@@ -27,6 +27,10 @@ namespace DDS.Data.Configuration
             Property(u => u.Perfil.Sexo).IsOptional();
             Property(u => u.Perfil.PreferenciaAlimenticia).IsOptional();
             Property(u => u.Perfil.FechaNacimiento).IsOptional();
+
+            HasMany(c => c.UsuarioRecetas)
+               .WithRequired(x => x.Usuario)
+               .Map(cp => cp.MapKey("UsuarioId"));
         }
     }
 }
