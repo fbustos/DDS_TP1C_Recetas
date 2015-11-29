@@ -251,5 +251,10 @@ namespace DDS.Controllers
                 receta.Ingredientes = idIngredientes.Select(x => recetaService.GetIngredienteById(x)).ToList();
             }
         }
+
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
     }
 }

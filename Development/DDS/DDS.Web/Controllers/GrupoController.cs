@@ -16,11 +16,13 @@ namespace DDS.Controllers
     {
         private readonly IGrupoService grupoService;
         private readonly IUsuarioService usuarioService;
+        private readonly IRecetaService recetaService;
 
-        public GrupoController(IGrupoService grupoService, IUsuarioService usuarioService)
+        public GrupoController(IGrupoService grupoService, IUsuarioService usuarioService, IRecetaService recetaService)
         {
             this.grupoService = grupoService;
             this.usuarioService = usuarioService;
+            this.recetaService = recetaService;
         }
 
         // GET: Grupo/MisGrupos
@@ -155,10 +157,15 @@ namespace DDS.Controllers
 
             foreach (Usuario usuario in grupos.Usuarios)
             {
-                
+                recetas.AddRange(this.recetaService.GetRecetas().Where(r => r.CreadaPor.Id == usuario.Id));
             }
 
+            recetas.OrderByDescending(x => x.FechaCreacion);
+
             var model = Mapper.Map<Grupo, GrupoViewModel>(grupos);
+
+            model.Recetas = recetas;
+
             return View(model);
         }
     }
