@@ -223,6 +223,7 @@
     <Content Include="Views\Grupo\Delete.cshtml" />
     <Content Include="Views\Grupo\Buscar.cshtml" />
     <Content Include="Views\Grupo\VerGrupos.cshtml" />
+    <Content Include="Views\Grupo\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DDS.Data\DDS.Data.csproj">

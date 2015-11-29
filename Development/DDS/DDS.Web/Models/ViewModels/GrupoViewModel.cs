@@ -14,5 +14,7 @@ namespace DDS.Models.ViewModels
 
         [Display(Name = "Descripcion")]
         public string Descripcion { get; set; }
+
+        public IEnumerable<Usuario> Usuarios { get; set; }
     }
 }

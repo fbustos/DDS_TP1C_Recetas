@@ -149,8 +149,16 @@ namespace DDS.Controllers
 
         public ActionResult Details(int id)
         {
-            var grupos = this.grupoService.GetGruposPorUsuarioUnido(this.Current.User.Id);
-            var model = Mapper.Map<IEnumerable<Grupo>, IList<GrupoViewModel>>(grupos);
+            var grupos = this.grupoService.GetGrupo(id);
+
+            List<Receta> recetas = new List<Receta>();
+
+            foreach (Usuario usuario in grupos.Usuarios)
+            {
+                
+            }
+
+            var model = Mapper.Map<Grupo, GrupoViewModel>(grupos);
             return View(model);
         }
     }
