@@ -228,6 +228,7 @@
     <Content Include="Views\Receta\MisRecetas.cshtml" />
     <Content Include="Views\Receta\VerRecetas.cshtml" />
     <Content Include="Views\Grupo\Details.cshtml" />
+    <Content Include="Views\Receta\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DDS.Data\DDS.Data.csproj">

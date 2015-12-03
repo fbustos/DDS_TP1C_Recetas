@@ -254,7 +254,13 @@ namespace DDS.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            Receta receta = recetaService.GetReceta(id);
+
+            //TODO contabilizar la consulta!!!
+
+            var model = Mapper.Map<Receta, RecetaViewModel>(receta);
+
+            return View(model);
         }
     }
 }
