@@ -35,8 +35,8 @@
                             @Html.DisplayFor(modelItem => item.Descripcion)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                            <a href="#" class="deleteButton" data-id="@item.Id" data-confirmation="@string.Format("Está seguro que desea eliminar el grupo: {0}?", item.Nombre)">Borrar</a>
                         </td>
                     </tr>
                 }
@@ -44,6 +44,28 @@
         </tbody>
     </table>
 </section>
+
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">Eliminar Grupo</h4>
+            </div>
+            <div class="modal-body nopad3" id="confirmation">
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Delete", "Grupo", FormMethod.Post))
+                {
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <input type="hidden" id="id" name="id" value="" />
+                    <button type="submit" class="btn btn-primary" id="btnDelete">Eliminar</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function () {
         $("#misGrupos").dataTable({
@@ -66,6 +88,15 @@
                     "previous": "Previa"
                 }
             }
+        });
+
+        $('.deleteButton').click(function () {
+            $("#modalDelete #confirmation").text($(this).data("confirmation"));
+            $("#modalDelete #id").val($(this).data("id"));
+            $('#modalDelete').modal({
+                backdrop: 'static',
+                keyboard: true
+            }, 'show');
         });
     });
 </script>

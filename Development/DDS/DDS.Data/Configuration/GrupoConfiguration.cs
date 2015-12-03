@@ -27,6 +27,7 @@ namespace DDS.Data.Configuration
                    m.MapLeftKey("GrupoId");
                    m.MapRightKey("UsuarioId");
                    m.ToTable("GruposUsuarios");
+                   
                });
         }
     }

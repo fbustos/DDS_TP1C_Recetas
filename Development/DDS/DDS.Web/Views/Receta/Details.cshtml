@@ -1,0 +1,76 @@
+﻿@model DDS.Models.ViewModels.RecetaViewModel
+@{
+    ViewBag.Title = "Detalle Receta";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <section id="ResgistroForm">
+            <div class="row" style="padding:5px;">
+                <div class="col-md-5" style="font-weight:600;text-align:right;">Nombre</div>
+                <div class="col-md-7"><p>@Model.Nombre</p></div>
+            </div>
+            <div class="row" style="padding:5px;">
+                <div class="col-md-5" style="font-weight:600;text-align:right;">Dificultad</div>
+                <div class="col-md-7">@Model.Dificultad</div>
+            </div>
+            <div class="row" style="padding:5px;">
+                <div class="col-md-5" style="font-weight:600;text-align:right;">Temporada</div>
+                <div class="col-md-7">@Model.Temporada</div>
+            </div>
+            <div class="row" style="padding:5px;">
+                <div class="col-md-5" style="font-weight:600;text-align:right;">Calorias</div>
+                <div class="col-md-7">@Model.Calorias</div>
+            </div>
+            <div class="row" style="padding:5px;">
+                <div class="col-md-5" style="font-weight:600;text-align:right;">Categorias</div>
+                <div class="col-md-7">
+                    @if (Model.Desayuno == true)
+                    {
+                        <span>Desayuno</span><br />
+                    }
+                    @if (Model.Almuerzo == true)
+                    {
+                        <span>Almuerzo</span><br />
+                    }
+                    @if (Model.Merienda == true)
+                    {
+                        <span>Merienda</span><br />
+                    }
+                    @if (Model.Cena == true)
+                    {
+                        <span>Cena</span><br />
+                    }
+                </div>
+            </div>
+
+            <div class="row" style="padding:5px;">
+                <div class="col-md-5" style="font-weight:600;text-align:right;">Ingredientes</div>
+                <div class="col-md-7">
+                    @foreach (DDS.Model.Models.Ingrediente ing in Model.Ingredientes)
+                    {
+                        <span>@ing.Nombre (@ing.Porcion)</span><br />
+                    }
+                </div>
+
+            </div>
+            <div class="row" style="padding:5px;">
+                <div class="col-md-5" style="font-weight:600;text-align:right;">Condimentos</div>
+                <div class="col-md-7">
+                    @foreach (DDS.Model.Models.Condimento con in Model.Condimentos)
+                    {
+                        <span>@con.Nombre</span><br />
+                    }
+                </div>
+
+            </div>
+
+                
+            <div class="clear"></div>
+        </section>
+    </div>
+    <div class="col-md-2"></div>
+</div>

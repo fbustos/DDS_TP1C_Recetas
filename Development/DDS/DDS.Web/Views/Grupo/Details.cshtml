@@ -1,0 +1,46 @@
+﻿@model DDS.Models.ViewModels.GrupoViewModel
+
+@{
+    ViewBag.Title = "Detalles del grupo:";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>@ViewBag.Title @Model.Nombre</h2>
+<section>
+    <h4>@Model.Descripcion</h4>
+    <div class="row">
+        <div class="col-md-3 details-group-users usuarios">
+            <div class="col-md-12 titulo">Usuarios</div>
+            @foreach (DDS.Model.Models.Usuario usuario in Model.Usuarios)
+            {
+                <div class="col-md-12">@usuario.Username</div>
+            }
+        </div>
+        <div class="col-md-9 recetas">
+            <div class="row"><div class="col-md-12 titulo">Recetas</div></div>
+            <div class="row receta-cabecera">
+                <div class="col-md-4">Nombre</div>
+                <div class="col-md-3">Creada el</div>
+                <div class="col-md-2">Puntaje</div>
+                <div class="col-md-3">Acciones</div>
+            </div>
+            
+            @foreach (DDS.Model.Models.Receta receta in Model.Recetas)
+            {
+                <div class="row receta">
+                    <div class="col-md-4 nombre">@receta.Nombre</div>
+                    <div class="col-md-3 fecha">@receta.FechaCreacion</div>
+                    @if (receta.CantidadVotos > 0) { 
+                    <div class="col-md-2">@(receta.TotalVotos / @receta.CantidadVotos)</div>
+                    }
+                    else
+                    {
+                        <div class="col-md-2">0</div>
+                    }
+                    <div class="col-md-3">@Html.ActionLink("Detalles", "Details", "Receta", new { id = receta.Id }, new { } )</div>
+                        
+                </div>
+            }
+        </div>
+    </div>
+</section>

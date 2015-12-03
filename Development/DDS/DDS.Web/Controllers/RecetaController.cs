@@ -251,5 +251,16 @@ namespace DDS.Controllers
                 receta.Ingredientes = idIngredientes.Select(x => recetaService.GetIngredienteById(x)).ToList();
             }
         }
+
+        public ActionResult Details(int id)
+        {
+            Receta receta = recetaService.GetReceta(id);
+
+            //TODO contabilizar la consulta!!!
+
+            var model = Mapper.Map<Receta, RecetaViewModel>(receta);
+
+            return View(model);
+        }
     }
 }
