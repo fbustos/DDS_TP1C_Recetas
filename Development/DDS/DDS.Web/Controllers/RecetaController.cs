@@ -20,12 +20,14 @@ namespace DDS.Controllers
         private readonly IRecetaService recetaService;
         private readonly IUsuarioService usuarioService;
         private readonly IPasoService pasoService;
+        private readonly IConsultaService consultaService;
 
-        public RecetaController(IRecetaService recetaService, IUsuarioService usuarioService, IPasoService pasoService)
+        public RecetaController(IRecetaService recetaService, IUsuarioService usuarioService, IPasoService pasoService, IConsultaService consultaService)
         {
             this.recetaService = recetaService;
             this.usuarioService = usuarioService;
             this.pasoService = pasoService;
+            this.consultaService = consultaService;
         }
 
         #region Cargar Receta
@@ -257,6 +259,12 @@ namespace DDS.Controllers
             Receta receta = recetaService.GetReceta(id);
 
             //TODO contabilizar la consulta!!!
+
+            Consulta consulta = new Consulta();
+            consulta.IdReceta = receta.Id;
+            consulta.IdUsuario = Current.User.Id;
+            consultaService.CreateConsulta(consulta);
+            consultaService.SaveConsulta();
 
             var model = Mapper.Map<Receta, RecetaViewModel>(receta);
 

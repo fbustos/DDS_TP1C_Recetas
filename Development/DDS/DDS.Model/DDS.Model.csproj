@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\ClassException.cs" />
     <Compile Include="Exceptions\DbException.cs" />
+    <Compile Include="Models\Consulta.cs" />
     <Compile Include="Models\Condimento.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Models\Grupo.cs" />
