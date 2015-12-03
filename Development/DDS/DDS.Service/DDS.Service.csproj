@@ -41,11 +41,13 @@
   <ItemGroup>
     <Compile Include="IGrupoService.cs" />
     <Compile Include="IPasoService.cs" />
+    <Compile Include="IConsultaService.cs" />
     <Compile Include="IRecetaService.cs" />
     <Compile Include="IUsuarioService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GrupoService.cs" />
     <Compile Include="PasoService.cs" />
+    <Compile Include="ConsultaService.cs" />
     <Compile Include="RecetaService.cs" />
     <Compile Include="UsuarioService.cs" />
   </ItemGroup>

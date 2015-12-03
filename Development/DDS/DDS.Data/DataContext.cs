@@ -32,6 +32,7 @@ namespace DDS.Data
             modelBuilder.Configurations.Add(new PasoConfiguration());
             modelBuilder.Configurations.Add(new GrupoConfiguration());
             modelBuilder.Configurations.Add(new UsuarioRecetaConfiguration());
+            modelBuilder.Configurations.Add(new ConsultaConfiguration());
         }
     }
 }
