@@ -114,7 +114,9 @@ namespace DDS.Controllers
                 var usuario = this.Current.User;
                 var perfil = Mapper.Map<PerfilViewModel, Perfil>(model);
                 usuario.Perfil = perfil;
-                usuarioService.UpdateUsuario(usuario);
+                var usuarioBd = usuarioService.GetUsuario(usuario.Id);
+                usuarioBd.Perfil = perfil;
+                usuarioService.UpdateUsuario(usuarioBd);
                 usuarioService.SaveUsuario();
                 TempData["SuccessMessage"] = string.Format("Perfil '{0}' cargado correctamente.", usuario.Username);
             }
@@ -122,11 +124,16 @@ namespace DDS.Controllers
             return View(model);
         }
 
-        private void IniciarSesion(Usuario usuario)
+        private void IniciarSesion(Usuario usuarioBd)
         {
-            usuario.Grupos = null;
-            usuario.MisRecetas = null;
-            usuario.UsuarioRecetas = null;
+            var usuario = new Usuario
+            {
+                Id = usuarioBd.Id,
+                Perfil = usuarioBd.Perfil,
+                Username = usuarioBd.Username,
+                FechaCreacion = usuarioBd.FechaCreacion,
+                FechaUltimaModificacion = usuarioBd.FechaUltimaModificacion
+            };
 
             string userData = JsonConvert.SerializeObject(usuario, Formatting.Indented,
                             new JsonSerializerSettings
