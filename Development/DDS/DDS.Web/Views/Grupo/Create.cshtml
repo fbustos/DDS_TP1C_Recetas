@@ -20,6 +20,13 @@
                     <div class="alert-success">
                         <p><strong>Success:</strong> @TempData["SuccessMessage"].ToString()</p>
                     </div>
+                    <script type="text/javascript">
+                        setTimeout(redireccionarAdministrar, 5000);
+
+                        function redireccionarAdministrar() {
+                            window.location = '@Url.Action("MisGrupos", "Grupo")';
+                        }
+                    </script>
                 }
                 <div class="form-group">
                     @Html.LabelFor(m => m.Nombre, new { @class = "col-md-5 control-label" })
