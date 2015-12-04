@@ -25,22 +25,29 @@
                 <div class="col-md-3">Acciones</div>
             </div>
             
-            @foreach (DDS.Model.Models.Receta receta in Model.Recetas)
+            @if (Model.Recetas.Count() > 0) { 
+                foreach (DDS.Model.Models.Receta receta in Model.Recetas)
+                {
+                    <div class="row receta">
+                        <div class="col-md-4 nombre">@receta.Nombre</div>
+                        <div class="col-md-3 fecha">@receta.FechaCreacion</div>
+                        @if (receta.CantidadVotos > 0) { 
+                        <div class="col-md-2">@(receta.CalificacionAcumulador / receta.CantidadVotos)</div>
+                        }
+                        else
+                        {
+                            <div class="col-md-2">0</div>
+                        }
+                        <div class="col-md-3">@Html.ActionLink("Detalles", "Details", "Receta", new { id = receta.Id }, new { } )</div>
+                        
+                    </div>
+                }
+            }
+            else
             {
                 <div class="row receta">
-                    <div class="col-md-4 nombre">@receta.Nombre</div>
-                    <div class="col-md-3 fecha">@receta.FechaCreacion</div>
-                    @if (receta.CantidadVotos > 0) { 
-                    <div class="col-md-2">@(receta.CalificacionAcumulador / receta.CantidadVotos)</div>
-                    }
-                    else
-                    {
-                        <div class="col-md-2">0</div>
-                    }
-                    <div class="col-md-3">@Html.ActionLink("Detalles", "Details", "Receta", new { id = receta.Id }, new { } )</div>
-                        
+                    <div class="col-md-12 " style="text-align:center;">Este grupo aun no posee ninguna receta compartida.</div>
                 </div>
             }
-        </div>
     </div>
 </section>

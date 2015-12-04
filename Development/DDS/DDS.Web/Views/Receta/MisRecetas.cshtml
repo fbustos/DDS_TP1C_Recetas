@@ -48,6 +48,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("Editar", "CargarReceta", new { id = item.Id }) |
+                            @Html.ActionLink("Detalle", "Details", new { id = item.Id }) |
                             <a href="#" class="deleteButton" data-id="@item.Id"
                                data-confirmation="@string.Format("Está seguro que desea eliminar la receta: {0}?", item.Nombre)">Borrar</a>
                         </td>

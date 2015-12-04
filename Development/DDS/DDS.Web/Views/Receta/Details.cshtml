@@ -19,24 +19,33 @@
     <div class="col-md-8">
         <section id="ResgistroForm">
             <div class="row" style="padding:5px;">
-                <div class="col-md-5" style="font-weight:600;text-align:right;">Nombre</div>
-                <div class="col-md-7"><p>@Model.Nombre</p></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-3 col-xs-6" style="font-weight:600;">Nombre</div>
+                <div class="col-md-5 col-xs-6"><p>@Model.Nombre</p></div>
+                <div class="col-md-2"></div>
             </div>
             <div class="row" style="padding:5px;">
-                <div class="col-md-5" style="font-weight:600;text-align:right;">Dificultad</div>
-                <div class="col-md-7">@Model.Dificultad</div>
+                <div class="col-md-2"></div>
+                <div class="col-md-3 col-xs-6" style="font-weight:600;">Dificultad</div>
+                <div class="col-md-5 col-xs-6">@Model.Dificultad</div>
+                <div class="col-md-2"></div>
             </div>
             <div class="row" style="padding:5px;">
-                <div class="col-md-5" style="font-weight:600;text-align:right;">Temporada</div>
-                <div class="col-md-7">@Model.Temporada</div>
+                <div class="col-md-2"></div>
+                <div class="col-md-3 col-xs-6" style="font-weight:600;">Temporada</div>
+                <div class="col-md-5 col-xs-6">@Model.Temporada</div>
+                <div class="col-md-2"></div>
             </div>
             <div class="row" style="padding:5px;">
-                <div class="col-md-5" style="font-weight:600;text-align:right;">Calorias</div>
-                <div class="col-md-7">@Model.Calorias</div>
+                <div class="col-md-2"></div>
+                <div class="col-md-3 col-xs-6" style="font-weight:600;">Calorias</div>
+                <div class="col-md-5 col-xs-6">@Model.Calorias</div>
+                <div class="col-md-2"></div>
             </div>
             <div class="row" style="padding:5px;">
-                <div class="col-md-5" style="font-weight:600;text-align:right;">Categorias</div>
-                <div class="col-md-7">
+                <div class="col-md-2"></div>
+                <div class="col-md-3 col-xs-6" style="font-weight:600;">Categorias</div>
+                <div class="col-md-5 col-xs-6">
                     @if (Model.Desayuno)
                     {
                         <span>Desayuno</span><br />
@@ -54,44 +63,51 @@
                         <span>Cena</span><br />
                     }
                 </div>
+                <div class="col-md-2"></div>
             </div>
 
             <div class="row" style="padding:5px;">
-                <div class="col-md-5" style="font-weight:600;text-align:right;">Ingredientes</div>
-                <div class="col-md-7">
+                <div class="col-md-2"></div>
+                <div class="col-md-3 col-xs-6" style="font-weight:600;">Ingredientes</div>
+                <div class="col-md-5 col-xs-6">
                     @foreach (DDS.Model.Models.Ingrediente ing in Model.Ingredientes)
                     {
                         <span>@ing.Nombre (@ing.Porcion)</span><br />
                     }
                 </div>
+                <div class="col-md-2"></div>
             </div>
             <div class="row" style="padding:5px;">
-                <div class="col-md-5" style="font-weight:600;text-align:right;">Condimentos</div>
-                <div class="col-md-7">
+                <div class="col-md-2"></div>
+                <div class="col-md-3 col-xs-6" style="font-weight:600;">Condimentos</div>
+                <div class="col-md-5 col-xs-6">
                     @foreach (DDS.Model.Models.Condimento con in Model.Condimentos)
                     {
                         <span>@con.Nombre</span><br />
                     }
                 </div>
+                <div class="col-md-2"></div>
             </div>
             @using (Html.BeginForm("Calificar", "Receta", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.HiddenFor(m => m.Id)
                 <div class="row" style="padding:5px;">
-                    <div class="col-md-5" style="font-weight:600;text-align:right;">Calificar</div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3 col-xs-6" style="font-weight:600;">Calificar</div>
                     @if (Model.YaLaCalifique(User.User.Id))
                     {
-                        <div class="col-md-7">@Html.EnumDropDownListFor(m => m.Calificacion, "--- Seleccione ---", new { @class = "form-control", disabled = "disabled" })</div>
+                        <div class="col-md-5 col-xs-6">@Html.EnumDropDownListFor(m => m.Calificacion, "--- Seleccione ---", new { @class = "form-control", disabled = "disabled" })</div>
                     }
                     else
                     {
-                        <div class="col-md-7">@Html.EnumDropDownListFor(m => m.Calificacion, "--- Seleccione ---", new { @class = "form-control" })</div>
+                        <div class="col-md-5 col-xs-6">@Html.EnumDropDownListFor(m => m.Calificacion, "--- Seleccione ---", new { @class = "form-control" })</div>
                     }
+                    <div class="col-md-2"></div>
                 </div>
 
-                <div class="form-group">
+                <div class="row">
                     <div class="col-md-offset-5 col-md-7">
-                        <input type="submit" value="Calificar" class="btn btn-primary" disabled="@Model.YaLaCalifique(User.User.Id)" />
+                        <input type="submit" value="Calificar" class="btn bt-gris" disabled="@Model.YaLaCalifique(User.User.Id)" />
                         <input type="button" value="Volver" class="btn btn-default " onclick="window.location.href='@Url.Action("VerRecetas", "Receta")'" />
                     </div>
                 </div>

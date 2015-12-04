@@ -23,6 +23,13 @@
                             @Html.ActionLink("Volver al Login", "Login")
                         </p>
                     </div>
+                    <script type="text/javascript">
+                        setTimeout(redireccionarAdministrar, 5000);
+
+                        function redireccionarAdministrar() {
+                            window.location = '@Url.Action("Login", "Account")';
+                        }
+                    </script>
                 }
                 <div class="form-group">
                     @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
@@ -44,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Registrar" class="btn btn-primary" />
+                        <input type="submit" value="Registrar" class="btn bt-gris" />
                         <input type="button" value="Volver" class="btn btn-default" onclick="window.location.href='@Url.Action("Login")'" />
                     </div>
                 </div>

@@ -1,10 +1,13 @@
 ﻿@model DDS.Models.ViewModels.RecetaViewModel
 @{
-    ViewBag.Title = "Cargar Receta";
+    ViewBag.Title = "Datos generales";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>
+    Receta<br />
+    @ViewBag.Title
+</h2>
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
@@ -24,6 +27,13 @@
                     <div class="alert-success">
                         <p><strong>Success:</strong> @TempData["SuccessMessage"].ToString()</p>
                     </div>
+                    <script type="text/javascript">
+                        setTimeout(redireccionarAdministrar, 5000);
+
+                        function redireccionarAdministrar() {
+                            window.location = '@Url.Action("MisRecetas", "Receta")';
+                        }
+                    </script>
                 }
                 <div class="form-group">
                     @Html.LabelFor(m => m.Nombre, new { @class = "col-md-5 control-label" })
@@ -154,7 +164,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
-                        <input id="btnGuardar" type="button" value="Guardar y Continuar" class="btn btn-primary" />
+                        <input id="btnGuardar" type="button" value="Ir al paso 1" class="btn bt-gris" />
                         <input type="button" value="Volver" class="btn btn-default" onclick="window.location.href='@Url.Action("MisRecetas")'" />
                     </div>
                 </div>
