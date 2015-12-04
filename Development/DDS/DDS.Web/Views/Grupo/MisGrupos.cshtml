@@ -36,6 +36,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
                             <a href="#" class="deleteButton" data-id="@item.Id" data-confirmation="@string.Format("Está seguro que desea eliminar el grupo: {0}?", item.Nombre)">Borrar</a>
                         </td>
                     </tr>
