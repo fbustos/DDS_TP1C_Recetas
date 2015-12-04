@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlanificacionService.cs" />
+    <Compile Include="IPlanificacionService.cs" />
     <Compile Include="IGrupoService.cs" />
     <Compile Include="IPasoService.cs" />
     <Compile Include="IConsultaService.cs" />

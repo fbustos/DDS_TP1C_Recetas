@@ -30,6 +30,10 @@ namespace DDS.Model.Models
 
         public virtual IList<UsuarioReceta> UsuarioRecetas { get; set; }
 
+        public virtual IList<Consulta> Consultas { get; set; }
+
+        public virtual IList<Planificacion> Planificaciones { get; set; }
+ 
         public void SetPassword(string password)
         {
             this.Password = this.Hash(password);

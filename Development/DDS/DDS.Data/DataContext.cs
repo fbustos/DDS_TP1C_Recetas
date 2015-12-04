@@ -33,6 +33,7 @@ namespace DDS.Data
             modelBuilder.Configurations.Add(new GrupoConfiguration());
             modelBuilder.Configurations.Add(new UsuarioRecetaConfiguration());
             modelBuilder.Configurations.Add(new ConsultaConfiguration());
+            modelBuilder.Configurations.Add(new PlanificacionConfiguration());
         }
     }
 }

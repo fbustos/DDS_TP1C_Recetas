@@ -185,8 +185,8 @@ namespace DDS.Controllers
             Receta receta = recetaService.GetReceta(id);
 
             Consulta consulta = new Consulta();
-            consulta.IdReceta = receta.Id;
-            consulta.IdUsuario = Current.User.Id;
+            consulta.Receta = receta;
+            consulta.Usuario = usuarioService.GetUsuario(Current.User.Id);
             consultaService.CreateConsulta(consulta);
             consultaService.SaveConsulta();
 

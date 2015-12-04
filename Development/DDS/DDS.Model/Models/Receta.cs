@@ -41,5 +41,9 @@ namespace DDS.Model.Models
         public DateTime FechaCreacion { get; set; }
 
         public DateTime? FechaUltimaModificacion { get; set; }
+
+        public virtual IList<Consulta> Consultas { get; set; }
+
+        public virtual IList<Planificacion> Planificaciones { get; set; }
     }
 }

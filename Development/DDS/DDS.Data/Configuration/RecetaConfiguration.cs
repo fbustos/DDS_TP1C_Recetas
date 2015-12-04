@@ -55,6 +55,16 @@ namespace DDS.Data.Configuration
                .WithRequired(x => x.Receta)
                .Map(cp => cp.MapKey("RecetaId"))
                .WillCascadeOnDelete(false);
+
+            HasMany(x => x.Consultas)
+                .WithRequired(x => x.Receta)
+                .Map(p => p.MapKey("RecetaId"))
+                .WillCascadeOnDelete(false);
+
+            HasMany(x => x.Planificaciones)
+                .WithRequired(x => x.Receta)
+                .Map(p => p.MapKey("RecetaId"))
+                .WillCascadeOnDelete(false);
         }
     }
 }

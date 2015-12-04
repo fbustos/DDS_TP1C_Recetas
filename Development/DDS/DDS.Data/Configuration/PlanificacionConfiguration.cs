@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace DDS.Data.Configuration
 {
-    public class ConsultaConfiguration : EntityTypeConfiguration<Consulta>
+    public class PlanificacionConfiguration : EntityTypeConfiguration<Planificacion>
     {
-        public ConsultaConfiguration()
+        public PlanificacionConfiguration()
         {
-            ToTable("Consultas").HasKey(u => u.Id);
+            ToTable("Planificacion").HasKey(u => u.Id);
             Property(u => u.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(u => u.FechaCreacion).IsRequired();
+            Property(u => u.Fecha).IsRequired();
+            Property(u => u.Categoria).IsRequired();
         }
     }
 }

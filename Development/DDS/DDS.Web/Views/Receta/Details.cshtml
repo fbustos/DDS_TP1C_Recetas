@@ -94,20 +94,13 @@
                 <div class="row" style="padding:5px;">
                     <div class="col-md-2"></div>
                     <div class="col-md-3 col-xs-6" style="font-weight:600;">Calificar</div>
-                    @if (Model.YaLaCalifique(User.User.Id))
-                    {
-                        <div class="col-md-5 col-xs-6">@Html.EnumDropDownListFor(m => m.Calificacion, "--- Seleccione ---", new { @class = "form-control", disabled = "disabled" })</div>
-                    }
-                    else
-                    {
                         <div class="col-md-5 col-xs-6">@Html.EnumDropDownListFor(m => m.Calificacion, "--- Seleccione ---", new { @class = "form-control" })</div>
-                    }
                     <div class="col-md-2"></div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-offset-5 col-md-7">
-                        <input type="submit" value="Calificar" class="btn bt-gris" disabled="@Model.YaLaCalifique(User.User.Id)" />
+                        <input type="submit" value="Calificar" class="btn bt-gris" />
                         <input type="button" value="Volver" class="btn btn-default " onclick="window.location.href='@Url.Action("VerRecetas", "Receta")'" />
                     </div>
                 </div>

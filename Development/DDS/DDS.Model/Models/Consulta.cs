@@ -9,9 +9,9 @@ namespace DDS.Model.Models
     {
         public int Id { get; set; }
 
-        public int IdReceta { get; set; }
+        public Receta Receta { get; set; }
 
-        public int IdUsuario { get; set; }
+        public Usuario Usuario { get; set; }
 
         public DateTime FechaCreacion { get; set; }
     }

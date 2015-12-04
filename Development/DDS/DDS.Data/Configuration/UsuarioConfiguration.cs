@@ -31,6 +31,14 @@ namespace DDS.Data.Configuration
             HasMany(c => c.UsuarioRecetas)
                .WithRequired(x => x.Usuario)
                .Map(cp => cp.MapKey("UsuarioId"));
+
+            HasMany(x => x.Consultas)
+                .WithRequired(x => x.Usuario)
+                .Map(p => p.MapKey("UsuarioId"));
+
+            HasMany(x => x.Planificaciones)
+                .WithRequired(x => x.Usuario)
+                .Map(p => p.MapKey("UsuarioId"));
         }
     }
 }

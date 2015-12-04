@@ -68,9 +68,9 @@ namespace DDS.Model.Enums
     public enum Categoria
     {
         Desayuno = 1,
-        Almuerzo,
-        Merienda,
-        Cena
+        Almuerzo = 2,
+        Merienda = 3,
+        Cena = 4
     }
 
     public enum Calificacion
