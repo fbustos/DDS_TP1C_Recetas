@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using DDS.Model.Enums;
 using DDS.Model.Models;
 
@@ -33,6 +35,12 @@ namespace DDS.Models.ViewModels
 
         public string CondimentosSeleccionados { get; set; }
 
+        public int CantidadVotos { get; set; }
+
+        public int CalificacionAcumulador { get; set; }
+
+        public Usuario CreadaPor { get; set; }
+
         public IList<Ingrediente> Ingredientes { get; set; }
 
         public IList<Ingrediente> IngredientesDisponibles { get; set; }
@@ -40,5 +48,23 @@ namespace DDS.Models.ViewModels
         public IList<Condimento> Condimentos { get; set; }
 
         public IList<Condimento> CondimentosDisponibles { get; set; }
+
+        public IList<UsuarioReceta> UsuarioRecetas { get; set; }
+
+        public Calificacion Calificacion { get; set; }
+
+        public bool YaLaCalifique(int usuarioId)
+        {
+            var urec = UsuarioRecetas.FirstOrDefault(ur => ur.Usuario.Id == usuarioId);
+            return urec != null && urec.Puntaje > 0;
+        }
+
+        public string Puntaje
+        {
+            get
+            {
+                return CantidadVotos > 0 ? String.Format("{0:0.##}", (double.Parse(CalificacionAcumulador.ToString()) / CantidadVotos)) : "0";
+            }
+        }
     }
 }

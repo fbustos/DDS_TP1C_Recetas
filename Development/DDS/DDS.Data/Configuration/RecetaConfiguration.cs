@@ -25,7 +25,7 @@ namespace DDS.Data.Configuration
             Property(u => u.Cena).IsRequired();
             Property(u => u.FechaCreacion).IsRequired();
             Property(u => u.FechaUltimaModificacion).IsOptional();
-            Property(u => u.TotalVotos).IsOptional();
+            Property(u => u.CalificacionAcumulador).IsOptional();
             Property(u => u.CantidadVotos).IsOptional();
 
             HasMany(x => x.Ingredientes).WithMany(x => x.Recetas).Map(
@@ -48,7 +48,7 @@ namespace DDS.Data.Configuration
                 .Map(p => p.MapKey("RecetaId"));
 
             HasRequired(x => x.CreadaPor)
-                .WithMany()
+                .WithMany(x => x.MisRecetas)
                 .Map(p => p.MapKey("UsuarioId"));
 
             HasMany(c => c.UsuarioRecetas)

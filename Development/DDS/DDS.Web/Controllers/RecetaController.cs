@@ -4,10 +4,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Web.Hosting;
-using System.Web.Routing;
-using Antlr.Runtime.Misc;
 using AutoMapper;
+using DDS.Model.Enums;
 using DDS.Model.Models;
+using DDS.Models.Security;
 using DDS.Models.ViewModels;
 using DDS.Service;
 using System.Linq;
@@ -15,6 +15,7 @@ using System.Web.Mvc;
 
 namespace DDS.Controllers
 {
+    [CustomAuthorize]
     public class RecetaController : BaseController
     {
         private readonly IRecetaService recetaService;
@@ -179,6 +180,58 @@ namespace DDS.Controllers
             return RedirectToAction("MisRecetas");
         }
 
+        public ActionResult Details(int id)
+        {
+            Receta receta = recetaService.GetReceta(id);
+
+            Consulta consulta = new Consulta();
+            consulta.IdReceta = receta.Id;
+            consulta.IdUsuario = Current.User.Id;
+            consultaService.CreateConsulta(consulta);
+            consultaService.SaveConsulta();
+
+            var model = Mapper.Map<Receta, RecetaViewModel>(receta);
+            var usuarioReceta = receta.UsuarioRecetas.FirstOrDefault(ur => ur.Usuario.Id == Current.User.Id);
+            if (usuarioReceta != null)
+            {
+                model.Calificacion = (Calificacion)usuarioReceta.Puntaje;
+            }
+
+            return View(model);
+        }
+
+        public ActionResult Calificar(int id, int calificacion)
+        {
+            var receta = recetaService.GetReceta(id);
+            var usuarioReceta = receta.UsuarioRecetas.FirstOrDefault(ur => ur.Usuario.Id == Current.User.Id);
+            
+            if (usuarioReceta != null)
+            {
+                usuarioReceta.Puntaje = calificacion;
+            }
+            else
+            {
+                var ur = new UsuarioReceta
+                {
+                    Receta = receta,
+                    Puntaje = calificacion,
+                    Usuario = usuarioService.GetUsuario(Current.User.Id)
+
+                };
+
+                receta.UsuarioRecetas.Add(ur);
+            }
+
+            receta.CantidadVotos++;
+            receta.CalificacionAcumulador += calificacion;
+            recetaService.UpdateReceta(receta);
+            recetaService.SaveReceta();
+
+            TempData["SuccessMessage"] = string.Format("Receta '{0}' calificada correctamente con: {1}", receta.Nombre, calificacion);
+
+            return RedirectToAction("Details", new { id });
+        }
+
         private string GetImagePath(PasoViewModel model)
         {
             string pathImages = HostingEnvironment.MapPath(ConfigurationManager.AppSettings["UploadedImagesPath"]);
@@ -252,23 +305,6 @@ namespace DDS.Controllers
                 var idIngredientes = model.IngredientesSeleccionados.Split(',').Select(int.Parse).ToList();
                 receta.Ingredientes = idIngredientes.Select(x => recetaService.GetIngredienteById(x)).ToList();
             }
-        }
-
-        public ActionResult Details(int id)
-        {
-            Receta receta = recetaService.GetReceta(id);
-
-            //TODO contabilizar la consulta!!!
-
-            Consulta consulta = new Consulta();
-            consulta.IdReceta = receta.Id;
-            consulta.IdUsuario = Current.User.Id;
-            consultaService.CreateConsulta(consulta);
-            consultaService.SaveConsulta();
-
-            var model = Mapper.Map<Receta, RecetaViewModel>(receta);
-
-            return View(model);
         }
     }
 }

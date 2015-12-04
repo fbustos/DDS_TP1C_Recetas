@@ -1,10 +1,19 @@
-﻿@model DDS.Models.ViewModels.RecetaViewModel
+﻿@using DDS.Model.Enums
+@model DDS.Models.ViewModels.RecetaViewModel
 @{
     ViewBag.Title = "Detalle Receta";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 <h2>@ViewBag.Title</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert-success">
+        <p><strong>Success:</strong> @TempData["SuccessMessage"].ToString()</p>
+    </div>
+}
+
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
@@ -28,19 +37,19 @@
             <div class="row" style="padding:5px;">
                 <div class="col-md-5" style="font-weight:600;text-align:right;">Categorias</div>
                 <div class="col-md-7">
-                    @if (Model.Desayuno == true)
+                    @if (Model.Desayuno)
                     {
                         <span>Desayuno</span><br />
                     }
-                    @if (Model.Almuerzo == true)
+                    @if (Model.Almuerzo)
                     {
                         <span>Almuerzo</span><br />
                     }
-                    @if (Model.Merienda == true)
+                    @if (Model.Merienda)
                     {
                         <span>Merienda</span><br />
                     }
-                    @if (Model.Cena == true)
+                    @if (Model.Cena)
                     {
                         <span>Cena</span><br />
                     }
@@ -55,7 +64,6 @@
                         <span>@ing.Nombre (@ing.Porcion)</span><br />
                     }
                 </div>
-
             </div>
             <div class="row" style="padding:5px;">
                 <div class="col-md-5" style="font-weight:600;text-align:right;">Condimentos</div>
@@ -65,10 +73,29 @@
                         <span>@con.Nombre</span><br />
                     }
                 </div>
-
             </div>
+            @using (Html.BeginForm("Calificar", "Receta", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.HiddenFor(m => m.Id)
+                <div class="row" style="padding:5px;">
+                    <div class="col-md-5" style="font-weight:600;text-align:right;">Calificar</div>
+                    @if (Model.YaLaCalifique(User.User.Id))
+                    {
+                        <div class="col-md-7">@Html.EnumDropDownListFor(m => m.Calificacion, "--- Seleccione ---", new { @class = "form-control", disabled = "disabled" })</div>
+                    }
+                    else
+                    {
+                        <div class="col-md-7">@Html.EnumDropDownListFor(m => m.Calificacion, "--- Seleccione ---", new { @class = "form-control" })</div>
+                    }
+                </div>
 
-                
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-7">
+                        <input type="submit" value="Calificar" class="btn btn-primary" disabled="@Model.YaLaCalifique(User.User.Id)" />
+                        <input type="button" value="Volver" class="btn btn-default " onclick="window.location.href='@Url.Action("VerRecetas", "Receta")'" />
+                    </div>
+                </div>
+            }
             <div class="clear"></div>
         </section>
     </div>

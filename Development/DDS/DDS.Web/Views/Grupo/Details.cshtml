@@ -31,7 +31,7 @@
                     <div class="col-md-4 nombre">@receta.Nombre</div>
                     <div class="col-md-3 fecha">@receta.FechaCreacion</div>
                     @if (receta.CantidadVotos > 0) { 
-                    <div class="col-md-2">@(receta.TotalVotos / @receta.CantidadVotos)</div>
+                    <div class="col-md-2">@(receta.CalificacionAcumulador / receta.CantidadVotos)</div>
                     }
                     else
                     {

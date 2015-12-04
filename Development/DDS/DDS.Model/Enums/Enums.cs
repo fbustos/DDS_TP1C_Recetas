@@ -72,4 +72,18 @@ namespace DDS.Model.Enums
         Merienda,
         Cena
     }
+
+    public enum Calificacion
+    {
+        [Display(Name = "5 - Excelente")]
+        Excelente = 5,
+        [Display(Name = "4 - Muy buena")]
+        MuyBuena = 4,
+        [Display(Name = "3 - buena")]
+        Buena = 3,
+        [Display(Name = "2 - Regular")]
+        Regular = 2,
+        [Display(Name = "1 - Mala")]
+        Mala = 1,
+    }
 }

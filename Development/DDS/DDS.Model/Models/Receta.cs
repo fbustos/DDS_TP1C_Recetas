@@ -26,7 +26,7 @@ namespace DDS.Model.Models
 
         public int CantidadVotos { get; set; }
 
-        public int TotalVotos { get; set; }
+        public int CalificacionAcumulador { get; set; }
 
         public virtual IList<Ingrediente> Ingredientes { get; set; }
 
