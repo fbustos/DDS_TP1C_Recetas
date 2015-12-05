@@ -165,10 +165,10 @@ namespace DDS.Controllers
             return View(model);
         }
 
-        public ActionResult VerRecetas()
+        public ActionResult Planificaciones()
         {
-            var recetas = this.recetaService.GetRecetasConfirmadas(this.Current.User.Id);
-            var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
+            var planificaciones = this.planificacionService.ObtenerPlanificadas(this.Current.User.Id);
+            var model = Mapper.Map<IEnumerable<Planificacion>, IList<PlanificacionViewModel>>(planificaciones);
             return View(model);
         }
 
@@ -248,10 +248,18 @@ namespace DDS.Controllers
                 Categoria = model.Planificacion.Categoria
             };
 
-            planificacionService.CreatePlanificacion(planificacion);
-            planificacionService.SavePlanificacion();
+            if (planificacionService.VerificarDisponibilidad(planificacion))
+            {
+                planificacionService.CreatePlanificacion(planificacion);
+                planificacionService.SavePlanificacion();
 
-            TempData["SuccessMessage"] = "La receta fuee planificada correctamente";
+                TempData["SuccessMessage"] = "La receta fue planificada correctamente";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "La receta no puede ser planificada para la fecha y categoria seleccionadas. Esa comida ya esta planeada.";
+            }
+            
 
             return RedirectToAction("Details", new { model.Id });
         }

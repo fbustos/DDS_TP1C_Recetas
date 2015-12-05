@@ -155,6 +155,7 @@
     <Compile Include="Models\Security\BaseViewPage.cs" />
     <Compile Include="Models\Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Models\Security\CustomPrincipal.cs" />
+    <Compile Include="Models\ViewModels\PlanificacionViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\PasoViewModel.cs" />
     <Compile Include="Models\ViewModels\RecetaViewModel.cs" />
@@ -226,7 +227,7 @@
     <Content Include="Views\Grupo\VerGrupos.cshtml" />
     <Content Include="Views\Receta\_CargarPaso.cshtml" />
     <Content Include="Views\Receta\MisRecetas.cshtml" />
-    <Content Include="Views\Receta\VerRecetas.cshtml" />
+    <Content Include="Views\Receta\Planificaciones.cshtml" />
     <Content Include="Views\Grupo\Details.cshtml" />
     <Content Include="Views\Receta\Details.cshtml" />
   </ItemGroup>

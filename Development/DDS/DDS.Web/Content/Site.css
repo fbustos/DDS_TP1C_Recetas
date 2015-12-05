@@ -72,7 +72,7 @@ h4{
     text-align:center;
 }
 
-.alert-success {
+.alert-success, .alert-danger {
     text-align:center;
     margin: 15px 0 15px 0;
     padding: 10px 0 10px 0;
