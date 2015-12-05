@@ -53,6 +53,10 @@ namespace DDS.Models.ViewModels
 
         public Calificacion Calificacion { get; set; }
 
+        public Planificacion Planificacion { get; set; }
+
+        public IList<Planificacion> Planificaciones { get; set; }
+
         public bool YaLaCalifique(int usuarioId)
         {
             var urec = UsuarioRecetas.FirstOrDefault(ur => ur.Usuario.Id == usuarioId);

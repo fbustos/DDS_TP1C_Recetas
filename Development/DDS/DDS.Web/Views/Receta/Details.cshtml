@@ -105,8 +105,41 @@
                     </div>
                 </div>
             }
+            @using (Html.BeginForm("Planificar", "Receta", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.HiddenFor(m => m.Id)
+                <div class="row" style="padding:5px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3 col-xs-6" style="font-weight:600;">Fecha</div>
+                    <div class="col-md-5 col-xs-6">@Html.TextBoxFor(m => m.Planificacion.Fecha, new { @class = "form-control" })</div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row" style="padding:5px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3 col-xs-6" style="font-weight:600;">Categoria</div>
+                    <div class="col-md-5 col-xs-6">@Html.EnumDropDownListFor(m => m.Planificacion.Categoria, "--- Seleccione ---", new { @class = "form-control" })</div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-offset-5 col-md-7">
+                        <input type="submit" value="Planificar" class="btn bt-gris" />
+                        <input type="button" value="Volver" class="btn btn-default " onclick="window.location.href='@Url.Action("VerRecetas", "Receta")'" />
+                    </div>
+                </div>
+            }
             <div class="clear"></div>
         </section>
     </div>
     <div class="col-md-2"></div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#Planificacion_Fecha").datepicker({
+            startView: 2,
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+    });
+</script>

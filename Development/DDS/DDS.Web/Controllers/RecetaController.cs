@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -22,13 +23,15 @@ namespace DDS.Controllers
         private readonly IUsuarioService usuarioService;
         private readonly IPasoService pasoService;
         private readonly IConsultaService consultaService;
+        private readonly IPlanificacionService planificacionService;
 
-        public RecetaController(IRecetaService recetaService, IUsuarioService usuarioService, IPasoService pasoService, IConsultaService consultaService)
+        public RecetaController(IRecetaService recetaService, IUsuarioService usuarioService, IPasoService pasoService, IConsultaService consultaService, IPlanificacionService planificacionService)
         {
             this.recetaService = recetaService;
             this.usuarioService = usuarioService;
             this.pasoService = pasoService;
             this.consultaService = consultaService;
+            this.planificacionService = planificacionService;
         }
 
         #region Cargar Receta
@@ -230,6 +233,27 @@ namespace DDS.Controllers
             TempData["SuccessMessage"] = string.Format("Receta '{0}' calificada correctamente con: {1}", receta.Nombre, calificacion);
 
             return RedirectToAction("Details", new { id });
+        }
+
+        public ActionResult Planificar(RecetaViewModel model)
+        {
+            var receta = recetaService.GetReceta(model.Id);
+            var usuario = usuarioService.GetUsuario(Current.User.Id);
+
+            Planificacion planificacion = new Planificacion
+            {
+                Receta = receta,
+                Usuario = usuario,
+                Fecha = model.Planificacion.Fecha,
+                Categoria = model.Planificacion.Categoria
+            };
+
+            planificacionService.CreatePlanificacion(planificacion);
+            planificacionService.SavePlanificacion();
+
+            TempData["SuccessMessage"] = "La receta fuee planificada correctamente";
+
+            return RedirectToAction("Details", new { model.Id });
         }
 
         private string GetImagePath(PasoViewModel model)
