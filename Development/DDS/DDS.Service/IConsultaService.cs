@@ -10,5 +10,7 @@ namespace DDS.Service
         Consulta GetConsulta(int id);
         void CreateConsulta(Consulta consulta);
         void SaveConsulta();
+
+        IEnumerable<Receta> GetEntreFechas(System.DateTime? f1, System.DateTime? f2);
     }
 }

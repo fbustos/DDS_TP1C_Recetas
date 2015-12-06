@@ -1,0 +1,162 @@
+﻿@model IList<DDS.Models.ViewModels.RecetaViewModel>
+
+@{
+    ViewBag.Title = "Buscar";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<section>
+    
+    <div class="form-group">
+        @Html.Label("Tipo de búsqueda", new { @class = "control-label" })
+        <div class="col-md-12">
+            @Html.DropDownList("TipoBusqueda", new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "Recetas consultadas en un período",
+                    Value = "1",
+                    Selected = true
+                },
+                new SelectListItem
+                {
+                    Text = "Recetas nuevas",
+                    Value = "2"
+                },
+                new SelectListItem
+                {
+                    Text = "Preferencias de recetas en un período",
+                    Value = "3"
+                },
+                new SelectListItem
+                {
+                    Text = "Según un rango de calorías",
+                    Value = "4"
+                }
+            }, new { @class = "form-control" })
+        </div>
+    </div>
+    
+    @using (Ajax.BeginForm("BuscarPorPeriodo", "Receta", FormMethod.Post, new AjaxOptions { UpdateTargetId = "misRecetas", LoadingElementId = "loader" }, new { @class = "form-horizontal", id = "formPeriodo" }))
+    {
+        <div class="form-group">
+            @Html.Label("Fecha inicio", new { @class = "col-md-5 control-label" })
+            <div class="col-md-7">
+                @Html.TextBox("f1", "", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Fecha fin", new { @class = "col-md-5 control-label" })
+            <div class="col-md-7">
+                @Html.TextBox("f2", "", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                <button id="btnBuscar" class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    }
+    @using (Ajax.BeginForm("BuscarNuevas", "Receta", FormMethod.Post, new AjaxOptions { UpdateTargetId = "misRecetas", LoadingElementId = "loader" }, new { @class = "form-horizontal", id = "formNuevas" }))
+    {
+    }
+    @using (Ajax.BeginForm("BuscarPorCalorias", "Receta", FormMethod.Post, new AjaxOptions { UpdateTargetId = "misRecetas", LoadingElementId = "loader" }, new { @class = "form-horizontal", id = "formCalorias" }))
+    {
+        <div class="form-group">
+            @Html.Label("Base en calorías", new { @class = "col-md-5 control-label" })
+            <div class="col-md-7">
+                @Html.TextBox("cal1", "", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Tope en calorías", new { @class = "col-md-5 control-label" })
+            <div class="col-md-7">
+                @Html.TextBox("cal2", "", new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                <button id="btnBuscar" class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    }
+
+    @Html.Partial("Buscar/_ResultadoBusqueda", Model)
+</section>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $('form').hide();
+        $("#formPeriodo").show();
+
+        $("#misRecetas").dataTable({
+            "language": {
+                "emptyTable": "No se encontraron Recetas",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                "infoFiltered": "(filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "No se encontraron registros",
+                "paginate": {
+                    "first": "Primer",
+                    "last": "Ultima",
+                    "next": "Siguiente",
+                    "previous": "Previa"
+                }
+            }
+        });
+
+        $("#f1,#f2").datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+
+        $('#TipoBusqueda').on('change', function () {
+            $('form').hide();
+            var value = $(this).val();
+            switch(value) {
+                case "1":
+                    $("#formPeriodo").show();
+                    $('#formPeriodo').attr('action', '@Url.Action("BuscarPorPeriodo")');
+                    break;
+                case "2":
+                    $("#formNuevas").show();
+                    $("#formNuevas").submit();
+                    break;
+                case "3":
+                    $("#formPeriodo").show();
+                    $('#formPeriodo').attr('action', '@Url.Action("BuscarPreferenciasPorPeriodo")');
+                    break;
+                case "4":
+                    $("#formCalorias").show();
+                    break;
+            }
+        });
+
+        //$('#f1').on('changeDate', function (ev) {
+        //    var date = $(this).val();
+        //    var day = date.substr(0, 2);
+        //    var month = date.substr(3, 2);
+        //    var year = date.substr(6, 4);
+        //    var d = new Date(year,month-1,day);
+        //    $("#f2").datepicker({
+        //        format: 'dd/mm/yyyy',
+        //        autoclose: true,
+        //        starDate: d
+        //    });
+        //});
+    });
+</script>

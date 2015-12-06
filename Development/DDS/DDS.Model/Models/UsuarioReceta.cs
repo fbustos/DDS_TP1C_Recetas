@@ -1,4 +1,6 @@
-﻿namespace DDS.Model.Models
+﻿using System;
+
+namespace DDS.Model.Models
 {
     public class UsuarioReceta
     {
@@ -8,6 +10,8 @@
 
         public virtual Receta Receta { get; set; }
 
-        public int Puntaje { get; set; } //additional info
+        public int Puntaje { get; set; }
+
+        public DateTime Fecha { get; set; }
     }
 }

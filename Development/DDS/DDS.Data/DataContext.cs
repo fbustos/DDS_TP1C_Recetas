@@ -16,7 +16,9 @@ namespace DDS.Data
         public DbSet<Condimento> Condimentos { get; set; }
         public DbSet<Paso> Pasos { get; set; }
         public DbSet<Grupo> Grupos { get; set; }
-        public DbSet<UsuarioReceta> UsuarioRecetas { get; set; } 
+        public DbSet<UsuarioReceta> UsuarioRecetas { get; set; }
+        public DbSet<Consulta> Consultas { get; set; }
+        public DbSet<Planificacion> Planificaciones { get; set; }
 
         public virtual void Commit()
         {

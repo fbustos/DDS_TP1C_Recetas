@@ -17,5 +17,8 @@ namespace DDS.Service
         Ingrediente GetIngredienteById(int id);
         Condimento GetCondimentoById(int id);
         IEnumerable<Receta> GetRecetasConfirmadas(int usuario);
+        IEnumerable<Receta> GetNuevas();
+        IEnumerable<Receta> GetPorCalorias(int? cal1, int? cal2);
+        IEnumerable<Receta> GetConfirmadasEntreFechas(System.DateTime? f1, System.DateTime? f2);
     }
 }

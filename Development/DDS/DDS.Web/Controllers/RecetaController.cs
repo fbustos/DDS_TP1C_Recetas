@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading;
 using System.Web.Hosting;
 using AutoMapper;
 using DDS.Model.Enums;
@@ -82,7 +84,7 @@ namespace DDS.Controllers
 
                 recetaService.SaveReceta();
                 TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", receta.Nombre);
-                
+
                 return RedirectToAction("_CargarPaso", new { recetaId = receta.Id, nroPaso = 0 });
             }
 
@@ -101,7 +103,7 @@ namespace DDS.Controllers
                 if (paso != null)
                 {
                     model = Mapper.Map<Paso, PasoViewModel>(paso);
-                    model.ImagenPath = this.GetImagePath(model);   
+                    model.ImagenPath = this.GetImagePath(model);
                 }
             }
 
@@ -147,7 +149,7 @@ namespace DDS.Controllers
             }
 
             TempData["SuccessMessage"] = string.Format("Se han cargado todos los pasos correctamente");
-            return RedirectToAction("CargarReceta", new {id = model.RecetaId});
+            return RedirectToAction("CargarReceta", new { id = model.RecetaId });
         }
 
         #endregion
@@ -204,7 +206,7 @@ namespace DDS.Controllers
         {
             var receta = recetaService.GetReceta(id);
             var usuarioReceta = receta.UsuarioRecetas.FirstOrDefault(ur => ur.Usuario.Id == Current.User.Id);
-            
+
             if (usuarioReceta != null)
             {
                 usuarioReceta.Puntaje = calificacion;
@@ -215,8 +217,8 @@ namespace DDS.Controllers
                 {
                     Receta = receta,
                     Puntaje = calificacion,
-                    Usuario = usuarioService.GetUsuario(Current.User.Id)
-
+                    Usuario = usuarioService.GetUsuario(Current.User.Id),
+                    Fecha = DateTime.Now
                 };
 
                 receta.UsuarioRecetas.Add(ur);
@@ -231,6 +233,43 @@ namespace DDS.Controllers
 
             return RedirectToAction("Details", new { id });
         }
+
+        #region Buscar
+
+        public ActionResult Buscar()
+        {
+            return View("Buscar/PorPeriodo");
+        }
+
+        public PartialViewResult BuscarPorPeriodo(DateTime? f1, DateTime? f2)
+        {
+            var recetas = consultaService.GetEntreFechas(f1, f2);
+            var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
+            return PartialView("Buscar/_ResultadoBusqueda", model);
+        }
+
+        public PartialViewResult BuscarNuevas()
+        {
+            var recetas = recetaService.GetNuevas();
+            var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
+            return PartialView("Buscar/_ResultadoBusqueda", model);
+        }
+
+        public PartialViewResult BuscarPorCalorias(int? cal1, int? cal2)
+        {
+            var recetas = recetaService.GetPorCalorias(cal1, cal2);
+            var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
+            return PartialView("Buscar/_ResultadoBusqueda", model);
+        }
+
+        public PartialViewResult BuscarPreferenciasPorPeriodo(DateTime? f1, DateTime? f2)
+        {
+            var recetas = recetaService.GetConfirmadasEntreFechas(f1, f2);
+            var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
+            return PartialView("Buscar/_ResultadoBusqueda", model);
+        }
+
+        #endregion
 
         private string GetImagePath(PasoViewModel model)
         {

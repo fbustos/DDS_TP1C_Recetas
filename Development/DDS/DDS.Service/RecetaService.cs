@@ -50,6 +50,27 @@ namespace DDS.Service
             return recetasConfirmadas.Union(recetasGrupos);
         }
 
+        public IEnumerable<Receta> GetNuevas()
+        {
+            return recetasRepository.GetAll().Where(r => (DateTime.Today - r.FechaCreacion).TotalDays < 7)
+                .OrderByDescending(r => r.FechaCreacion);
+        }
+
+        public IEnumerable<Receta> GetPorCalorias(int? cal1, int? cal2)
+        {
+            return recetasRepository.GetAll().Where(r => (cal1 == null || cal1 <= r.Calorias) && (cal2 == null || cal2 >= r.Calorias))
+                .OrderBy(r => r.Calorias);
+        }
+
+        public IEnumerable<Receta> GetConfirmadasEntreFechas(DateTime? f1, DateTime? f2)
+        {
+            return
+                recetasRepository.GetAll()
+                    .Where(r => r.UsuarioRecetas != null)
+                    .OrderByDescending(r => r.UsuarioRecetas.Count)
+                    .Take(15);
+        }
+
         public Receta GetReceta(int id)
         {
             var receta = recetasRepository.GetById(id);
