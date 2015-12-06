@@ -4,6 +4,7 @@ using DDS.Data.Interfaces;
 using DDS.Model.Models;
 using System;
 using System.Collections.Generic;
+using DDS.Model.Enums;
 
 namespace DDS.Service
 {
@@ -37,12 +38,46 @@ namespace DDS.Service
 
         public void CreatePlanificacion(Planificacion planificacion)
         {
-            planificacionesRepository.Add(planificacion);
+            if (this.VerificarDisponibilidad(planificacion) == true)
+            {
+                planificacionesRepository.Add(planificacion);
+            }
+            
         }
 
         public void SavePlanificacion()
         {
             unitOfWork.Commit();
+        }
+
+        public bool VerificarDisponibilidad(Planificacion planificacion)
+        {
+            IEnumerable<Planificacion> planificaciones = planificacionesRepository.GetAll()
+                .Where(
+                        x => 
+                            x.Receta.Id == planificacion.Receta.Id
+                            && x.Usuario.Id == planificacion.Usuario.Id 
+                            && x.Fecha.Day == planificacion.Fecha.Day
+                            && x.Fecha.Month == planificacion.Fecha.Month
+                            && x.Fecha.Year == planificacion.Fecha.Year
+                            && x.Categoria.ToString() == planificacion.Categoria.ToString()
+                 );
+            if (planificaciones.Count() > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public IEnumerable<Planificacion> ObtenerPlanificadas(int id)
+        {
+            return planificacionesRepository.GetAll()
+                .Where(x => x.Usuario.Id == id)
+                .OrderByDescending(x => x.Fecha)
+                .ThenBy(x => x.Categoria);
         }
 
         #endregion

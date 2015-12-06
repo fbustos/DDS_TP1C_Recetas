@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Threading;
 using System.Web.Hosting;
 using AutoMapper;
 using DDS.Model.Enums;
@@ -24,13 +23,15 @@ namespace DDS.Controllers
         private readonly IUsuarioService usuarioService;
         private readonly IPasoService pasoService;
         private readonly IConsultaService consultaService;
+        private readonly IPlanificacionService planificacionService;
 
-        public RecetaController(IRecetaService recetaService, IUsuarioService usuarioService, IPasoService pasoService, IConsultaService consultaService)
+        public RecetaController(IRecetaService recetaService, IUsuarioService usuarioService, IPasoService pasoService, IConsultaService consultaService, IPlanificacionService planificacionService)
         {
             this.recetaService = recetaService;
             this.usuarioService = usuarioService;
             this.pasoService = pasoService;
             this.consultaService = consultaService;
+            this.planificacionService = planificacionService;
         }
 
         #region Cargar Receta
@@ -84,7 +85,7 @@ namespace DDS.Controllers
 
                 recetaService.SaveReceta();
                 TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", receta.Nombre);
-
+                
                 return RedirectToAction("_CargarPaso", new { recetaId = receta.Id, nroPaso = 0 });
             }
 
@@ -103,7 +104,7 @@ namespace DDS.Controllers
                 if (paso != null)
                 {
                     model = Mapper.Map<Paso, PasoViewModel>(paso);
-                    model.ImagenPath = this.GetImagePath(model);
+                    model.ImagenPath = this.GetImagePath(model);   
                 }
             }
 
@@ -164,10 +165,10 @@ namespace DDS.Controllers
             return View(model);
         }
 
-        public ActionResult VerRecetas()
+        public ActionResult Planificaciones()
         {
-            var recetas = this.recetaService.GetRecetasConfirmadas(this.Current.User.Id);
-            var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
+            var planificaciones = this.planificacionService.ObtenerPlanificadas(this.Current.User.Id);
+            var model = Mapper.Map<IEnumerable<Planificacion>, IList<PlanificacionViewModel>>(planificaciones);
             return View(model);
         }
 
@@ -206,7 +207,7 @@ namespace DDS.Controllers
         {
             var receta = recetaService.GetReceta(id);
             var usuarioReceta = receta.UsuarioRecetas.FirstOrDefault(ur => ur.Usuario.Id == Current.User.Id);
-
+            
             if (usuarioReceta != null)
             {
                 usuarioReceta.Puntaje = calificacion;
@@ -232,6 +233,35 @@ namespace DDS.Controllers
             TempData["SuccessMessage"] = string.Format("Receta '{0}' calificada correctamente con: {1}", receta.Nombre, calificacion);
 
             return RedirectToAction("Details", new { id });
+        }
+
+        public ActionResult Planificar(RecetaViewModel model)
+        {
+            var receta = recetaService.GetReceta(model.Id);
+            var usuario = usuarioService.GetUsuario(Current.User.Id);
+
+            Planificacion planificacion = new Planificacion
+            {
+                Receta = receta,
+                Usuario = usuario,
+                Fecha = model.Planificacion.Fecha,
+                Categoria = model.Planificacion.Categoria
+            };
+
+            if (planificacionService.VerificarDisponibilidad(planificacion))
+            {
+                planificacionService.CreatePlanificacion(planificacion);
+                planificacionService.SavePlanificacion();
+
+                TempData["SuccessMessage"] = "La receta fue planificada correctamente";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "La receta no puede ser planificada para la fecha y categoria seleccionadas. Esa comida ya esta planeada.";
+            }
+            
+
+            return RedirectToAction("Details", new { model.Id });
         }
 
         #region Buscar
