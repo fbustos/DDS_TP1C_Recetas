@@ -225,7 +225,6 @@
     <Content Include="Views\Grupo\MisGrupos.cshtml" />
     <Content Include="Views\Grupo\Create.cshtml" />
     <Content Include="Views\Grupo\Edit.cshtml" />
-    <Content Include="Views\Grupo\Buscar.cshtml" />
     <Content Include="Views\Grupo\VerGrupos.cshtml" />
     <Content Include="Views\Receta\_CargarPaso.cshtml" />
     <Content Include="Views\Receta\MisRecetas.cshtml" />
@@ -234,6 +233,7 @@
     <Content Include="Views\Receta\Details.cshtml" />
     <Content Include="Views\Receta\Buscar\PorPeriodo.cshtml" />
     <Content Include="Views\Receta\Buscar\_ResultadoBusqueda.cshtml" />
+    <Content Include="Views\Grupo\Buscar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DDS.Data\DDS.Data.csproj">

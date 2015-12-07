@@ -38,7 +38,10 @@
                         {
                             <div class="col-md-2">0</div>
                         }
-                        <div class="col-md-3">@Html.ActionLink("Detalles", "Details", "Receta", new { id = receta.Id }, new { } )</div>
+                        <div class="col-md-3">
+                            @Html.ActionLink("Detalles", "Details", "Receta", new { id = receta.Id }, new { } ) |
+                            @Html.ActionLink("Editar", "CargarReceta", "Receta", new { id = receta.Id }, new { })
+                       </div>
                         
                     </div>
                 }

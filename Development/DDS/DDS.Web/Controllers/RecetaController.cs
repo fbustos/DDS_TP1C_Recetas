@@ -65,28 +65,61 @@ namespace DDS.Controllers
                 {
                     receta.CreadaPor = usuarioService.GetByUsername(Current.User.Username);
                     recetaService.CreateReceta(receta);
+
+                    recetaService.SaveReceta();
+                    TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", receta.Nombre);
+
+                    return RedirectToAction("_CargarPaso", new { recetaId = receta.Id, nroPaso = 0 });
                 }
                 else
                 {
                     var recetaBd = recetaService.GetReceta(receta.Id);
-                    recetaBd.Ingredientes.Clear();
-                    recetaBd.Ingredientes = receta.Ingredientes;
-                    recetaBd.Condimentos.Clear();
-                    recetaBd.Condimentos = receta.Condimentos;
-                    recetaBd.Cena = receta.Cena;
-                    recetaBd.Almuerzo = receta.Almuerzo;
-                    recetaBd.Merienda = receta.Merienda;
-                    recetaBd.Desayuno = receta.Desayuno;
-                    recetaBd.Nombre = receta.Nombre;
-                    recetaBd.Calorias = receta.Calorias;
-                    recetaBd.Dificultad = receta.Dificultad;
-                    recetaService.UpdateReceta(recetaBd);
-                }
+                    
 
-                recetaService.SaveReceta();
-                TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", receta.Nombre);
-                
-                return RedirectToAction("_CargarPaso", new { recetaId = receta.Id, nroPaso = 0 });
+                    if (recetaBd.CreadaPor.Id != Current.User.Id)
+                    {
+                        Receta unaReceta = new Receta
+                        {
+                            Ingredientes = receta.Ingredientes,
+                            Condimentos = receta.Condimentos,
+                            Cena = receta.Cena,
+                            Almuerzo = receta.Almuerzo,
+                            Merienda = receta.Merienda,
+                            Desayuno = receta.Desayuno,
+                            Nombre = receta.Nombre,
+                            Calorias = receta.Calorias,
+                            Dificultad = receta.Dificultad,
+                            CreadaPor = usuarioService.GetUsuario(Current.User.Id),
+                            Temporada = receta.Temporada
+                        };
+                        recetaService.CreateReceta(unaReceta);
+                        recetaService.SaveReceta();
+                        TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", unaReceta.Nombre);
+
+                        return RedirectToAction("_CargarPaso", new { recetaId = unaReceta.Id, nroPaso = 0 });
+                    }
+                    else
+                    {
+                        recetaBd.Ingredientes.Clear();
+                        recetaBd.Ingredientes = receta.Ingredientes;
+                        recetaBd.Condimentos.Clear();
+                        recetaBd.Condimentos = receta.Condimentos;
+                        recetaBd.Cena = receta.Cena;
+                        recetaBd.Almuerzo = receta.Almuerzo;
+                        recetaBd.Merienda = receta.Merienda;
+                        recetaBd.Desayuno = receta.Desayuno;
+                        recetaBd.Nombre = receta.Nombre;
+                        recetaBd.Calorias = receta.Calorias;
+                        recetaBd.Dificultad = receta.Dificultad;
+                        recetaService.UpdateReceta(recetaBd);
+
+                        recetaService.SaveReceta();
+                        TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", receta.Nombre);
+
+                        return RedirectToAction("_CargarPaso", new { recetaId = receta.Id, nroPaso = 0 });
+                    }
+                    
+                }
             }
 
             model.IngredientesDisponibles = this.recetaService.GetIngredientes();
