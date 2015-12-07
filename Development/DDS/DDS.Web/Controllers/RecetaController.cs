@@ -283,10 +283,48 @@ namespace DDS.Controllers
 
             if (planificacionService.VerificarDisponibilidad(planificacion))
             {
-                planificacionService.CreatePlanificacion(planificacion);
-                planificacionService.SavePlanificacion();
+                bool flagComida = false;
+                switch ((int)planificacion.Categoria)
+                {
+                    case 1:
+                        if (receta.Desayuno == true)
+                        {
+                            flagComida = true;
+                        }
+                        break;
+                    case 2:
+                        if (receta.Almuerzo == true)
+                        {
+                            flagComida = true;
+                        }
+                        break;
+                    case 3:
+                        if (receta.Merienda == true)
+                        {
+                            flagComida = true;
+                        }
+                        break;
+                    case 4:
+                        if (receta.Cena == true)
+                        {
+                            flagComida = true;
+                        }
+                        break;
 
-                TempData["SuccessMessage"] = "La receta fue planificada correctamente";
+                }
+
+                if (flagComida == true)
+                {
+                    planificacionService.CreatePlanificacion(planificacion);
+                    planificacionService.SavePlanificacion();
+
+                    TempData["SuccessMessage"] = "La receta fue planificada correctamente";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "La receta no esta disponible para la categoria seleccionada.";
+                }
+                
             }
             else
             {

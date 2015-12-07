@@ -16,5 +16,7 @@ namespace DDS.Service
         bool VerificarDisponibilidad(Planificacion planificacion);
 
         IEnumerable<Planificacion> ObtenerPlanificadas(int id);
+
+        IEnumerable<Planificacion> ObtenerPlanificadas10(int id);
     }
 }
