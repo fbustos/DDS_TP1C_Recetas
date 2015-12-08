@@ -80,6 +80,15 @@ namespace DDS.Service
                 .ThenBy(x => x.Categoria);
         }
 
+        public IEnumerable<Planificacion> ObtenerPlanificadas10(int id)
+        {
+            return planificacionesRepository.GetAll()
+                .Where(x => x.Usuario.Id == id)
+                .OrderByDescending(x => x.Fecha)
+                .ThenBy(x => x.Categoria)
+                .Take(10);
+        }
+
         #endregion
 
     }
