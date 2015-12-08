@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DDS.Model.Enums;
 using DDS.Model.Models;
 
 namespace DDS.Data
@@ -16,6 +17,8 @@ namespace DDS.Data
             GetIngredientes().ForEach(u => context.Ingredientes.Add(u));
             GetCondimentos().ForEach(u => context.Condimentos.Add(u));
 
+            context.Commit();
+            GetRecetas(context).ForEach(u => context.Recetas.Add(u));
             context.Commit();
         }
 
@@ -89,6 +92,41 @@ namespace DDS.Data
                 }
             };
             return condimentos;
+        }
+
+        private static List<Receta> GetRecetas(DataContext context)
+        {
+            var recetas = new List<Receta>
+            {
+                new Receta
+                {
+                    Nombre = "Receta de Verano",
+                    Dificultad = Dificultad.Media,
+                    Temporada = Temporada.Verano,
+                    Merienda = true,
+                    Desayuno = true,
+                    FechaCreacion = DateTime.Now,
+                    CreadaPor = context.Usuarios.Find(1),
+                    Calorias = 200,
+                    Ingredientes = context.Ingredientes.ToList(),
+                    Condimentos = context.Condimentos.ToList()
+                },
+                new Receta
+                {
+                    Nombre = "Receta de Invierno",
+                    Dificultad = Dificultad.Dificil,
+                    Temporada = Temporada.Invierno,
+                    Cena = true,
+                    Almuerzo = true,
+                    FechaCreacion = DateTime.Now,
+                    CreadaPor = context.Usuarios.Find(1),
+                    Calorias = 400,
+                    Ingredientes = context.Ingredientes.ToList(),
+                    Condimentos = context.Condimentos.ToList()
+                }
+            };
+
+            return recetas;
         }
     }
 }

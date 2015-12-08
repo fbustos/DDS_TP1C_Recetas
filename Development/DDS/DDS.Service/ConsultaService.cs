@@ -49,9 +49,9 @@ namespace DDS.Service
         public IEnumerable<Receta> GetEntreFechas(DateTime? f1, DateTime? f2)
         {
             var consultas = consultasRepository.GetAll().Where(row => (f1 == null || row.FechaCreacion >= f1)
-                                                      && (f2 == null || row.FechaCreacion <= f2));
+                                                      && (f2 == null || row.FechaCreacion <= f2)).OrderByDescending(row => row.FechaCreacion);
 
-            return consultas.Select(c => c.Receta);
+            return consultas.Select(c => c.Receta).Distinct();
         }
 
         #endregion
