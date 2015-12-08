@@ -13,5 +13,17 @@ namespace DDS.Data.Repositories
     {
         public RecetaRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
+
+        public override void Delete(Receta entity)
+        {
+            using (var dbContext = DbContext)
+            {
+                dbContext.Consultas.RemoveRange(entity.Consultas);
+                dbContext.Planificaciones.RemoveRange(entity.Planificaciones);
+                dbContext.UsuarioRecetas.RemoveRange(entity.UsuarioRecetas);
+                dbContext.Recetas.Remove(entity);
+                dbContext.Commit();
+            }
+        }
     }
 }

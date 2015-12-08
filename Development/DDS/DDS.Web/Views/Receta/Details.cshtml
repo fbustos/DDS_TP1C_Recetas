@@ -27,7 +27,9 @@
         <section id="ResgistroForm">
             <div class="row">
                 <div class="col-md-12">
-                    <input type="button" value="Volver" class="btn btn-default " onclick="window.location.href='@Url.Action("MisRecetas", "Receta")'" />
+                    <input type="button" value="Volver" class="btn btn-default" onclick="window.location.href='@Url.Action("MisRecetas", "Receta")'" />
+                    @{ var name = User.User.Id == Model.CreadaPor.Id ? "Editar" : "Clonar"; }
+                    <input type="button" value="@name" class="btn btn-primary" onclick="window.location.href='@Url.Action("CargarReceta", "Receta", new { id = Model.Id })'" />
                 </div>
             </div>
             <hr />
@@ -108,7 +110,7 @@
                 <div class="row" style="padding:5px;">
                     <div class="col-md-2"></div>
                     <div class="col-md-3 col-xs-6" style="font-weight:600;">Puntaje</div>
-                        <div class="col-md-5 col-xs-6">@Html.EnumDropDownListFor(m => m.Calificacion, "--- Seleccione ---", new { @class = "form-control" })</div>
+                    <div class="col-md-5 col-xs-6">@Html.EnumDropDownListFor(m => m.Calificacion, "--- Seleccione ---", new { @class = "form-control" })</div>
                     <div class="col-md-2"></div>
                 </div>
 
@@ -150,7 +152,6 @@
 <script>
     $(document).ready(function () {
         $("#Planificacion_Fecha").datepicker({
-            startView: 2,
             format: 'dd/mm/yyyy',
             autoclose: true
         });

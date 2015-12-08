@@ -61,42 +61,19 @@ namespace DDS.Controllers
                 var receta = Mapper.Map<RecetaViewModel, Receta>(model);
                 this.GuardarIngredientes(model, receta);
                 this.GuardarCondimentos(model, receta);
+
                 if (model.Id == 0)
                 {
-                    receta.CreadaPor = usuarioService.GetByUsername(Current.User.Username);
+                    receta.CreadaPor = usuarioService.GetUsuario(Current.User.Id);
                     recetaService.CreateReceta(receta);
-
-                    recetaService.SaveReceta();
-                    TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", receta.Nombre);
-
-                    return RedirectToAction("_CargarPaso", new { recetaId = receta.Id, nroPaso = 0 });
                 }
                 else
                 {
                     var recetaBd = recetaService.GetReceta(receta.Id);
-                    
-
                     if (recetaBd.CreadaPor.Id != Current.User.Id)
                     {
-                        Receta unaReceta = new Receta
-                        {
-                            Ingredientes = receta.Ingredientes,
-                            Condimentos = receta.Condimentos,
-                            Cena = receta.Cena,
-                            Almuerzo = receta.Almuerzo,
-                            Merienda = receta.Merienda,
-                            Desayuno = receta.Desayuno,
-                            Nombre = receta.Nombre,
-                            Calorias = receta.Calorias,
-                            Dificultad = receta.Dificultad,
-                            CreadaPor = usuarioService.GetUsuario(Current.User.Id),
-                            Temporada = receta.Temporada
-                        };
-                        recetaService.CreateReceta(unaReceta);
-                        recetaService.SaveReceta();
-                        TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", unaReceta.Nombre);
-
-                        return RedirectToAction("_CargarPaso", new { recetaId = unaReceta.Id, nroPaso = 0 });
+                        receta.CreadaPor = usuarioService.GetUsuario(Current.User.Id);
+                        recetaService.CreateReceta(receta);
                     }
                     else
                     {
@@ -112,14 +89,13 @@ namespace DDS.Controllers
                         recetaBd.Calorias = receta.Calorias;
                         recetaBd.Dificultad = receta.Dificultad;
                         recetaService.UpdateReceta(recetaBd);
-
-                        recetaService.SaveReceta();
-                        TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", receta.Nombre);
-
-                        return RedirectToAction("_CargarPaso", new { recetaId = receta.Id, nroPaso = 0 });
                     }
-                    
                 }
+
+                recetaService.SaveReceta();
+                TempData["SuccessMessage"] = string.Format("Receta '{0}' cargada correctamente.", receta.Nombre);
+
+                return RedirectToAction("_CargarPaso", new { recetaId = receta.Id, nroPaso = 0 });
             }
 
             model.IngredientesDisponibles = this.recetaService.GetIngredientes();
@@ -137,7 +113,7 @@ namespace DDS.Controllers
                 if (paso != null)
                 {
                     model = Mapper.Map<Paso, PasoViewModel>(paso);
-                    model.ImagenPath = this.GetImagePath(model);   
+                    model.ImagenPath = this.GetImagePath(model);
                 }
             }
 
@@ -211,7 +187,6 @@ namespace DDS.Controllers
         {
             var receta = recetaService.GetReceta(id);
             recetaService.DeleteReceta(receta);
-            recetaService.SaveReceta();
 
             return RedirectToAction("MisRecetas");
         }
@@ -240,7 +215,7 @@ namespace DDS.Controllers
         {
             var receta = recetaService.GetReceta(id);
             var usuarioReceta = receta.UsuarioRecetas.FirstOrDefault(ur => ur.Usuario.Id == Current.User.Id);
-            
+
             if (usuarioReceta != null)
             {
                 usuarioReceta.Puntaje = calificacion;
@@ -292,7 +267,7 @@ namespace DDS.Controllers
             {
                 TempData["ErrorMessage"] = "La receta no puede ser planificada para la fecha y categoria seleccionadas. Esa comida ya esta planeada.";
             }
-            
+
 
             return RedirectToAction("Details", new { model.Id });
         }
@@ -301,7 +276,9 @@ namespace DDS.Controllers
 
         public ActionResult Buscar()
         {
-            return View("Buscar/PorPeriodo");
+            var recetas = consultaService.GetEntreFechas(null, null);
+            var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
+            return View("Buscar/Reportes", model);
         }
 
         public PartialViewResult BuscarPorPeriodo(DateTime? f1, DateTime? f2)
