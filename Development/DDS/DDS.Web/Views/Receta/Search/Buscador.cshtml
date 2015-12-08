@@ -1,0 +1,84 @@
+﻿@model IList<DDS.Models.ViewModels.RecetaViewModel>
+
+@{
+    ViewBag.Title = "Buscar";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<section>
+    
+    @using (Ajax.BeginForm("SearchFiltrado", "Receta", FormMethod.Post, new AjaxOptions { UpdateTargetId = "misRecetas", LoadingElementId = "loader" }, new { @class = "form-horizontal", id = "formPeriodo" }))
+    {
+        <div class="form-group">
+            @Html.Label("Calorias", new { @class = "col-md-5 control-label" })
+            <div class="col-md-7">
+                @Html.TextBox("Calorias", "", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Temporada", new { @class = "col-md-5 control-label" })
+            <div class="col-md-7">
+                @Html.DropDownList("Temporada", new List<SelectListItem>
+                    {
+                        new SelectListItem(),
+                        new SelectListItem{Text = "Verano",Value = "1"},
+                        new SelectListItem{Text = "Otonio",Value = "2"},
+                        new SelectListItem{Text = "Invierno",Value = "3"},
+                        new SelectListItem{Text = "Primavera",Value = "4"}
+                    }, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Dificultad", new { @class = "col-md-5 control-label" })
+            <div class="col-md-7">
+                @Html.DropDownList("Dificultad", new List<SelectListItem>
+                {
+                    new SelectListItem(),
+                    new SelectListItem{Text = "Facil",Value = "1"},
+                    new SelectListItem{Text = "Media",Value = "2"},
+                    new SelectListItem{Text = "Dificil",Value = "3"},
+                    new SelectListItem{Text = "MuyDificil",Value = "4"}
+                }, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-7">
+                <button id="btnBuscar" class="btn bt-gris">Buscar</button>
+            </div>
+        </div>
+    }
+
+    @Html.Partial("Search/_ResultadoBusqueda", Model)
+</section>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#misRecetas").dataTable({
+            "language": {
+                "emptyTable": "No se encontraron Recetas",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                "infoFiltered": "(filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "No se encontraron registros",
+                "paginate": {
+                    "first": "Primer",
+                    "last": "Ultima",
+                    "next": "Siguiente",
+                    "previous": "Previa"
+                }
+            }
+        });
+
+        $("#misRecetas_filter").hide();
+    });
+</script>

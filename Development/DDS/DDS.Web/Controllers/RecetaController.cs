@@ -446,5 +446,17 @@ namespace DDS.Controllers
                 receta.Ingredientes = idIngredientes.Select(x => recetaService.GetIngredienteById(x)).ToList();
             }
         }
+
+        public ActionResult Search()
+        {
+            return View("Search/Buscador");
+        }
+
+        public PartialViewResult SearchFiltrado(int? Calorias, Temporada? Temporada, Dificultad? Dificultad)
+        {
+            var recetas = recetaService.GetFiltradas(Calorias, Temporada, Dificultad);
+            var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
+            return PartialView("Search/_ResultadoBusqueda", model);
+        }
     }
 }

@@ -234,6 +234,8 @@
     <Content Include="Views\Receta\Buscar\PorPeriodo.cshtml" />
     <Content Include="Views\Receta\Buscar\_ResultadoBusqueda.cshtml" />
     <Content Include="Views\Grupo\Buscar.cshtml" />
+    <Content Include="Views\Receta\Search\_ResultadoBusqueda.cshtml" />
+    <Content Include="Views\Receta\Search\Buscador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DDS.Data\DDS.Data.csproj">

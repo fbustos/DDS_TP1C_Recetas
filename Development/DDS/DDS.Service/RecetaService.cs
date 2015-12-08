@@ -4,6 +4,7 @@ using DDS.Data.Interfaces;
 using DDS.Model.Models;
 using System;
 using System.Collections.Generic;
+using DDS.Model.Enums;
 
 namespace DDS.Service
 {
@@ -117,6 +118,16 @@ namespace DDS.Service
         public Condimento GetCondimentoById(int id)
         {
             return this.condimentoRepository.GetById(id);
+        }
+
+        public IEnumerable<Receta> GetFiltradas(int? Calorias, Temporada? Temporada, Dificultad? Dificultad)
+        {
+            return recetasRepository.GetAll().Where(
+                x=>
+                (Calorias == null || x.Calorias == Calorias) &&
+                (Temporada == null || x.Temporada == Temporada) &&
+                (Dificultad == null || x.Dificultad == Dificultad)
+            );
         }
 
         #endregion

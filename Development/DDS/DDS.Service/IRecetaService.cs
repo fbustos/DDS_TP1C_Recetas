@@ -1,4 +1,5 @@
-﻿using DDS.Model.Models;
+﻿using DDS.Model.Enums;
+using DDS.Model.Models;
 using System.Collections.Generic;
 
 namespace DDS.Service
@@ -20,5 +21,7 @@ namespace DDS.Service
         IEnumerable<Receta> GetNuevas();
         IEnumerable<Receta> GetPorCalorias(int? cal1, int? cal2);
         IEnumerable<Receta> GetConfirmadasEntreFechas(System.DateTime? f1, System.DateTime? f2);
+
+        IEnumerable<Receta> GetFiltradas(int? Calorias, Temporada? Temporada, Dificultad? Dificultad);
     }
 }
