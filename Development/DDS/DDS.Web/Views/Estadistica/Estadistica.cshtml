@@ -1,0 +1,66 @@
+﻿@using DDS.Model.Enums
+@model DDS.Models.ViewModels.EstadisticaViewModel
+
+@{
+    ViewBag.Title = "Estadísticas";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<section>
+
+    <div class="form-group">
+        @Html.Label("Estadisticas:", new { @class = "control-label" })
+        <div class="col-md-12">
+            <div class="btn-group" role="group" aria-label="...">
+                <button id="btnSemanal" type="button" class="btn btn-default">Semanales</button>
+                <button id="btnMensual" type="button" class="btn btn-default">Mensuales</button>
+            </div>
+        </div>
+    </div>
+    <hr />
+    @using (Ajax.BeginForm("GetEstadisticas", "Estadistica", FormMethod.Post, new AjaxOptions { UpdateTargetId = "ranking", LoadingElementId = "loader" }, new { @class = "form-horizontal", id = "formEstadisticas" }))
+    {
+        @Html.HiddenFor(m => m.Semanal)
+        <div class="form-group">
+            @Html.LabelFor(m => m.Sexo, new { @class = "control-label" })
+            <div class="col-md-7">
+                @Html.EnumDropDownListFor(m => m.Sexo, "--- Seleccione ---", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Sexo, new { @class = "control-label" })
+            <div class="col-md-7">
+                @Html.EnumDropDownListFor(m => m.Dificultad, "--- Seleccione ---", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-4">
+                <button id="btnBuscar" class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    }
+
+    <div id="ranking"></div>
+</section>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#formEstadisticas").hide();
+
+        $("#btnSemanal").click(function () {
+            $("#formEstadisticas").show();
+            $("#Semanal").val(true);
+            $("#formEstadisticas").submit();
+        });
+
+        $("#btnMensual").click(function () {
+            $("#formEstadisticas").show();
+            $("#Semanal").val(false);
+            $("#formEstadisticas").submit();
+        });
+    });
+</script>

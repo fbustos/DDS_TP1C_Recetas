@@ -136,3 +136,8 @@ h4{
 .recetas{
     border-left: 4px solid grey;
 }
+
+tr.group,
+tr.group:hover {
+    background-color: #bdbdbd !important;
+}

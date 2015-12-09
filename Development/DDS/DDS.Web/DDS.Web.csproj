@@ -143,6 +143,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\EstadisticaController.cs" />
     <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RecetaController.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Models\Security\BaseViewPage.cs" />
     <Compile Include="Models\Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Models\Security\CustomPrincipal.cs" />
+    <Compile Include="Models\ViewModels\EstadisticaViewModel.cs" />
     <Compile Include="Models\ViewModels\PlanificacionViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\PasoViewModel.cs" />
@@ -236,6 +238,8 @@
     <Content Include="Views\Grupo\Buscar.cshtml" />
     <Content Include="Views\Receta\Search\_ResultadoBusqueda.cshtml" />
     <Content Include="Views\Receta\Search\Buscador.cshtml" />
+    <Content Include="Views\Estadistica\Estadistica.cshtml" />
+    <Content Include="Views\Estadistica\_ResultadoBusqueda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DDS.Data\DDS.Data.csproj">

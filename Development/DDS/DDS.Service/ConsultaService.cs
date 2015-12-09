@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Globalization;
+using System.Linq;
 using DDS.Data.Infrastructure;
 using DDS.Data.Interfaces;
 using DDS.Model.Models;
@@ -53,6 +55,51 @@ namespace DDS.Service
 
             return consultas.Select(c => c.Receta).Distinct();
         }
+
+        public IEnumerable<IGrouping<int, Receta>> GetEstadisticasSemanales(int? sexo, int? dificultad)
+        {
+            var consultasFiltradas = consultasRepository.GetAll().Where(c =>
+                (sexo == null || sexo == 0 || sexo == (int?)c.Usuario.Perfil.Sexo) &&
+                (dificultad == null || dificultad == 0 || dificultad == (int?)c.Receta.Dificultad));
+
+            var consultasAgrupadas = consultasFiltradas.Select(c => new
+            {
+                semana = weekProjector(c.FechaCreacion) - weekProjector(c.Usuario.FechaCreacion),
+                receta = c.Receta
+            })
+            .GroupBy(x => x.semana, y => y.receta);
+
+            var consultasOrdenadas = consultasAgrupadas.OrderByDescending(g => g.Count());
+
+            return consultasOrdenadas;
+        }
+
+        public IEnumerable<IGrouping<int, Receta>> GetEstadisticasMensuales(int? sexo, int? dificultad)
+        {
+            var consultasFiltradas = consultasRepository.GetAll().Where(c =>
+                (sexo == null || sexo == 0 || sexo == (int?)c.Usuario.Perfil.Sexo) &&
+                (dificultad == null || dificultad == 0 || dificultad == (int?)c.Receta.Dificultad));
+
+            var consultasAgrupadas = consultasFiltradas.Select(c => new
+            {
+                semana = monthProjector(c.FechaCreacion) - monthProjector(c.Usuario.FechaCreacion),
+                receta = c.Receta
+            }).GroupBy(x => x.semana, y => y.receta);
+
+            var consultasOrdenadas = consultasAgrupadas.OrderByDescending(g => g.Count());
+
+            return consultasOrdenadas;
+        }
+
+        readonly Func<DateTime, int> weekProjector =
+            d => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(
+                d,
+                CalendarWeekRule.FirstFourDayWeek,
+                DayOfWeek.Sunday);
+
+        readonly Func<DateTime, int> monthProjector =
+           d => CultureInfo.CurrentCulture.Calendar.GetMonthsInYear(
+               d.Year);
 
         #endregion
 

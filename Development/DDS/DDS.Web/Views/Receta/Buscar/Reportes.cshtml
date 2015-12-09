@@ -37,7 +37,7 @@
             }, new { @class = "form-control" })
         </div>
     </div>
-    
+    <hr/>
     @using (Ajax.BeginForm("BuscarPorPeriodo", "Receta", FormMethod.Post, new AjaxOptions { UpdateTargetId = "misRecetas", LoadingElementId = "loader" }, new { @class = "form-horizontal", id = "formPeriodo" }))
     {
         <div class="form-group">

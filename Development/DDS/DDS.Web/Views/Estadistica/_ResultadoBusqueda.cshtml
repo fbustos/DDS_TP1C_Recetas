@@ -1,0 +1,111 @@
+﻿@model Dictionary<string, IEnumerable<DDS.Model.Models.Receta>>
+<table id="misRecetas" class="table dataTable table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Dificultad
+            </th>
+            <th>
+                Temporada
+            </th>
+            <th>
+                Calorias
+            </th>
+            <th>
+                Creada Por
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                foreach (var receta in item.Value)
+                {
+                    <tr>
+                        <td>
+                            @item.Key
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => receta.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => receta.Dificultad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => receta.Temporada)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => receta.Calorias)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => receta.CreadaPor.Username)
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        var table = $('#misRecetas').DataTable({
+            "columnDefs": [
+                { "visible": false, "targets": 0 }
+            ],
+            //"order": [[ 0, 'asc' ]],
+            "displayLength": 10,
+            "drawCallback": function (settings) {
+                var api = this.api();
+                var rows = api.rows({ page: 'current' }).nodes();
+                var last = null;
+
+                api.column(0, { page: 'current' }).data().each(function (group, i) {
+                    if (last !== group) {
+                        $(rows).eq(i).before(
+                            '<tr class="group"><td colspan="5">' + group + '</td></tr>'
+                        );
+
+                        last = group;
+                    }
+                });
+            },
+            "language": {
+                "emptyTable": "No se encontraron Recetas",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                "infoFiltered": "(filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "No se encontraron registros",
+                "paginate": {
+                    "first": "Primer",
+                    "last": "Ultima",
+                    "next": "Siguiente",
+                    "previous": "Previa"
+                }
+            }
+        });
+
+        // Order by the grouping
+        $('#example tbody').on('click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if (currentOrder[0] === 0 && currentOrder[1] === 'asc') {
+                table.order([0, 'desc']).draw();
+            }
+            else {
+                table.order([0, 'asc']).draw();
+            }
+        });
+    });
+</script>
