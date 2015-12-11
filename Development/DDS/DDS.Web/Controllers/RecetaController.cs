@@ -316,35 +316,35 @@ namespace DDS.Controllers
         {
             var recetas = consultaService.GetEntreFechas(null, null);
             var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
-            return View("Buscar/Reportes", model);
+            return View("Reportes/Reportes", model);
         }
 
         public PartialViewResult BuscarPorPeriodo(DateTime? f1, DateTime? f2)
         {
             var recetas = consultaService.GetEntreFechas(f1, f2);
             var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
-            return PartialView("Buscar/_ResultadoBusqueda", model);
+            return PartialView("Reportes/_ResultadoBusqueda", model);
         }
 
         public PartialViewResult BuscarNuevas()
         {
             var recetas = recetaService.GetNuevas();
             var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
-            return PartialView("Buscar/_ResultadoBusqueda", model);
+            return PartialView("Reportes/_ResultadoBusqueda", model);
         }
 
         public PartialViewResult BuscarPorCalorias(int? cal1, int? cal2)
         {
             var recetas = recetaService.GetPorCalorias(cal1, cal2);
             var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
-            return PartialView("Buscar/_ResultadoBusqueda", model);
+            return PartialView("Reportes/_ResultadoBusqueda", model);
         }
 
         public PartialViewResult BuscarPreferenciasPorPeriodo(DateTime? f1, DateTime? f2)
         {
             var recetas = recetaService.GetConfirmadasEntreFechas(f1, f2);
             var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
-            return PartialView("Buscar/_ResultadoBusqueda", model);
+            return PartialView("Reportes/_ResultadoBusqueda", model);
         }
 
         #endregion
