@@ -22,6 +22,6 @@ namespace DDS.Service
         IEnumerable<Receta> GetPorCalorias(int? cal1, int? cal2);
         IEnumerable<Receta> GetConfirmadasEntreFechas(System.DateTime? f1, System.DateTime? f2);
 
-        IEnumerable<Receta> GetFiltradas(int? Calorias, Temporada? Temporada, Dificultad? Dificultad);
+        IEnumerable<Receta> GetFiltradas(int? Calorias, Temporada? Temporada, Dificultad? Dificultad, Condicion condicion);
     }
 }

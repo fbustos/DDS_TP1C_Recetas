@@ -103,6 +103,15 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
+            @if (!string.IsNullOrEmpty(Model.Recomendaciones))
+            {
+                <div class="row" style="padding:5px;">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3 col-xs-6" style="font-weight:600;">Recomendaciones</div>
+                    <div class="col-md-5 col-xs-6">@Html.LabelFor(m => m.Recomendaciones, Model.Recomendaciones)</div>
+                    <div class="col-md-2"></div>
+                </div>
+            }
             <div class="row"><div class="col-md-12"><h4 style="font-size:1.2em;font-weight:900;">Calificacion</h4></div></div>
             @using (Html.BeginForm("Calificar", "Receta", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {

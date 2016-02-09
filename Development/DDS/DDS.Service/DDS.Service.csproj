@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICondicionService.cs" />
     <Compile Include="PlanificacionService.cs" />
     <Compile Include="IPlanificacionService.cs" />
     <Compile Include="IGrupoService.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="PasoService.cs" />
     <Compile Include="ConsultaService.cs" />
     <Compile Include="RecetaService.cs" />
+    <Compile Include="CondicionService.cs" />
     <Compile Include="UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup>

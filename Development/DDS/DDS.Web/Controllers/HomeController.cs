@@ -32,29 +32,29 @@ namespace DDS.Controllers
 
         public ActionResult Home()
         {
-            List<Receta> recetas = new List<Receta>();
-            IEnumerable<Planificacion> planificaciones = planificacionService.ObtenerPlanificadas10(Current.User.Id);
-            if (planificaciones.Count() > 0)
+            var recetas = new List<Receta>();
+            IEnumerable<Planificacion> planificaciones = planificacionService.ObtenerPlanificadas10(Current.User.Id).ToList();
+            if (planificaciones.Any())
             {
-                foreach (Planificacion planificacion in planificaciones)
-                {
-                    recetas.Add(planificacion.Receta);
-                }
-
-                
+                recetas.AddRange(planificaciones.Select(planificacion => planificacion.Receta));
             }
             else
             {
                 Usuario usuario = usuarioService.GetUsuario(Current.User.Id);
                 recetas = usuario.UsuarioRecetas.OrderByDescending(x => x.Fecha).Take(10).Select(x => x.Receta).ToList();
-                if (recetas.Count() == 0)
+                if (!recetas.Any())
                 {
-                    recetas = recetaService.GetRecetas().Where(x=>x.CantidadVotos>0).OrderBy(x => (x.CalificacionAcumulador / x.CantidadVotos)).Take(10).ToList();
+                    if (usuario.Condicion != null)
+                    {
+                        recetas = recetaService.GetRecetas().Where(x => x.Condicion != null && x.Condicion.Id == usuario.Condicion.Id).Take(10).ToList();
+                    }
+                    else
+                    {
+                        recetas = recetaService.GetRecetas().Where(x => x.CantidadVotos > 0).OrderBy(x => (x.CalificacionAcumulador / x.CantidadVotos)).Take(10).ToList();
+                    }
                 }
             }
 
-
-            recetas.OrderByDescending(x => (x.CalificacionAcumulador / x.CantidadVotos));
             var model = Mapper.Map<IEnumerable<Receta>, IEnumerable<RecetaViewModel>>(recetas);
 
             return View(model);

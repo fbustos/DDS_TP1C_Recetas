@@ -16,6 +16,7 @@ namespace DDS.Data
             GetUsuarios().ForEach(u => context.Usuarios.Add(u));
             GetIngredientes().ForEach(u => context.Ingredientes.Add(u));
             GetCondimentos().ForEach(u => context.Condimentos.Add(u));
+            GetCondiciones().ForEach(u => context.Condiciones.Add(u));
 
             context.Commit();
             GetRecetas(context).ForEach(u => context.Recetas.Add(u));
@@ -127,6 +128,33 @@ namespace DDS.Data
             };
 
             return recetas;
+        }
+
+        private static List<Condicion> GetCondiciones()
+        {
+            var condiciones = new List<Condicion>();
+            var diabetes = new Diabetes()
+            {
+                Id = 1,
+                Nombre = "Diabetes"
+            };
+            condiciones.Add(diabetes);
+
+            var hipertension = new Hipertension()
+            {
+                Id = 2,
+                Nombre = "Hipertensión"
+            };
+            condiciones.Add(hipertension);
+
+            var celiasis = new Celiasis()
+            {
+                Id = 3,
+                Nombre = "Celiasis"
+            };
+            condiciones.Add(celiasis);
+
+            return condiciones;
         }
     }
 }

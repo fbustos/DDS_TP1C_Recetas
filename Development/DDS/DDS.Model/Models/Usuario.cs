@@ -33,6 +33,8 @@ namespace DDS.Model.Models
         public virtual IList<Consulta> Consultas { get; set; }
 
         public virtual IList<Planificacion> Planificaciones { get; set; }
+
+        public virtual Condicion Condicion { get; set; } 
  
         public void SetPassword(string password)
         {

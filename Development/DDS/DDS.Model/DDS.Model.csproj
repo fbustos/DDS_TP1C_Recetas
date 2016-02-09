@@ -42,17 +42,24 @@
   <ItemGroup>
     <Compile Include="Exceptions\ClassException.cs" />
     <Compile Include="Exceptions\DbException.cs" />
+    <Compile Include="Models\Celiasis.cs" />
+    <Compile Include="Models\Condicion.cs" />
     <Compile Include="Models\Consulta.cs" />
     <Compile Include="Models\Condimento.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Models\Diabetes.cs" />
     <Compile Include="Models\Grupo.cs" />
+    <Compile Include="Models\Hipertension.cs" />
+    <Compile Include="Models\IVisitor.cs" />
     <Compile Include="Models\Planificacion.cs" />
     <Compile Include="Models\Ingrediente.cs" />
     <Compile Include="Models\Paso.cs" />
     <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\Receta.cs" />
+    <Compile Include="Models\Recomendaciones.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuarioReceta.cs" />
+    <Compile Include="Models\Visitable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

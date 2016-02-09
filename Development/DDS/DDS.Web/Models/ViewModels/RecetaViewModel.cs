@@ -23,6 +23,11 @@ namespace DDS.Models.ViewModels
         [Range(1, int.MaxValue, ErrorMessage = "Debe completar las Calorias.")]
         public int Calorias { get; set; }
 
+        [Display(Name = "Para personas con condición")]
+        public int? Condicion { get; set; }
+
+        public IList<Condicion> Condiciones { get; set; }
+
         public bool Desayuno { get; set; }
 
         public bool Almuerzo { get; set; }
@@ -38,6 +43,8 @@ namespace DDS.Models.ViewModels
         public int CantidadVotos { get; set; }
 
         public int CalificacionAcumulador { get; set; }
+
+        public string Recomendaciones { get; set; }
 
         public Usuario CreadaPor { get; set; }
 

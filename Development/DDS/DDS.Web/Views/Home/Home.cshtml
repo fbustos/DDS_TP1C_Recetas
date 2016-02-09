@@ -46,7 +46,7 @@
                             @Html.DisplayFor(modelItem => item.Calorias)
                         </td>
                         <td>
-                            @Html.ActionLink("Detalle", "Details", new { id = item.Id })
+                            <a href="@Url.Action("Details", "Receta", new { id = item.Id })">Detalle</a>
                         </td>
                     </tr>
                 }

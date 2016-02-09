@@ -24,14 +24,16 @@ namespace DDS.Controllers
         private readonly IPasoService pasoService;
         private readonly IConsultaService consultaService;
         private readonly IPlanificacionService planificacionService;
+        private readonly ICondicionService condicionService;
 
-        public RecetaController(IRecetaService recetaService, IUsuarioService usuarioService, IPasoService pasoService, IConsultaService consultaService, IPlanificacionService planificacionService)
+        public RecetaController(IRecetaService recetaService, ICondicionService condicionService, IUsuarioService usuarioService, IPasoService pasoService, IConsultaService consultaService, IPlanificacionService planificacionService)
         {
             this.recetaService = recetaService;
             this.usuarioService = usuarioService;
             this.pasoService = pasoService;
             this.consultaService = consultaService;
             this.planificacionService = planificacionService;
+            this.condicionService = condicionService;
         }
 
         #region Cargar Receta
@@ -44,10 +46,17 @@ namespace DDS.Controllers
             {
                 var receta = this.recetaService.GetReceta(id.Value);
                 model = Mapper.Map<Receta, RecetaViewModel>(receta);
+                if (receta.Condicion != null)
+                {
+                    model.Condicion = receta.Condicion.Id;
+                    receta.Condicion.Accept(new Recomendaciones());
+                    model.Recomendaciones = receta.Condicion.Recomendaciones;
+                }
             }
 
             model.IngredientesDisponibles = this.recetaService.GetIngredientes();
             model.CondimentosDisponibles = this.recetaService.GetCondimentos();
+            model.Condiciones = this.condicionService.GetCondiciones().ToList();
 
             return View(model);
         }
@@ -61,6 +70,7 @@ namespace DDS.Controllers
                 var receta = Mapper.Map<RecetaViewModel, Receta>(model);
                 this.GuardarIngredientes(model, receta);
                 this.GuardarCondimentos(model, receta);
+                this.GuardarCondicion(model, receta);
 
                 if (model.Id == 0)
                 {
@@ -81,6 +91,7 @@ namespace DDS.Controllers
                         recetaBd.Ingredientes = receta.Ingredientes;
                         recetaBd.Condimentos.Clear();
                         recetaBd.Condimentos = receta.Condimentos;
+                        this.GuardarCondicion(model, recetaBd);
                         recetaBd.Cena = receta.Cena;
                         recetaBd.Almuerzo = receta.Almuerzo;
                         recetaBd.Merienda = receta.Merienda;
@@ -101,6 +112,25 @@ namespace DDS.Controllers
             model.IngredientesDisponibles = this.recetaService.GetIngredientes();
             model.CondimentosDisponibles = this.recetaService.GetCondimentos();
             return View(model);
+        }
+
+        private void GuardarCondicion(RecetaViewModel model, Receta receta)
+        {
+            if (model.Condicion.HasValue)
+            {
+                receta.Condicion = condicionService.GetCondicion(model.Condicion.Value);
+                receta.Condicion.Accept(new Recomendaciones());
+                model.Recomendaciones = receta.Condicion.Recomendaciones;
+            }
+            else
+            {
+                model.Recomendaciones = string.Empty;
+                var exist = receta.Condicion.Recetas.Any(u => u.Id == receta.Id);
+                if (exist)
+                {
+                    receta.Condicion.Recetas.Remove(receta);
+                }
+            }
         }
 
         public ActionResult _CargarPaso(int recetaId, int nroPaso)
@@ -206,6 +236,12 @@ namespace DDS.Controllers
             if (usuarioReceta != null)
             {
                 model.Calificacion = (Calificacion)usuarioReceta.Puntaje;
+            }
+            if (receta.Condicion != null)
+            {
+                model.Condicion = receta.Condicion.Id;
+                receta.Condicion.Accept(new Recomendaciones());
+                model.Recomendaciones = receta.Condicion.Recomendaciones;
             }
 
             return View(model);
@@ -431,7 +467,8 @@ namespace DDS.Controllers
 
         public PartialViewResult SearchFiltrado(int? Calorias, Temporada? Temporada, Dificultad? Dificultad)
         {
-            var recetas = recetaService.GetFiltradas(Calorias, Temporada, Dificultad);
+            var usuario = usuarioService.GetUsuario(this.Current.User.Id);
+            var recetas = recetaService.GetFiltradas(Calorias, Temporada, Dificultad, usuario.Condicion);
             var model = Mapper.Map<IEnumerable<Receta>, IList<RecetaViewModel>>(recetas);
             return PartialView("Search/_ResultadoBusqueda", model);
         }

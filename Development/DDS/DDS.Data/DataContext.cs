@@ -19,6 +19,7 @@ namespace DDS.Data
         public DbSet<UsuarioReceta> UsuarioRecetas { get; set; }
         public DbSet<Consulta> Consultas { get; set; }
         public DbSet<Planificacion> Planificaciones { get; set; }
+        public DbSet<Condicion> Condiciones { get; set; }
 
         public virtual void Commit()
         {
@@ -36,6 +37,7 @@ namespace DDS.Data
             modelBuilder.Configurations.Add(new UsuarioRecetaConfiguration());
             modelBuilder.Configurations.Add(new ConsultaConfiguration());
             modelBuilder.Configurations.Add(new PlanificacionConfiguration());
+            modelBuilder.Configurations.Add(new CondicionConfiguration());
         }
     }
 }

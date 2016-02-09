@@ -70,6 +70,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    @Html.LabelFor(m => m.Condicion, new { @class = "col-md-5 control-label" })
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(m => m.Condicion, new SelectList(Model.Condiciones, "Id", "Nombre"), "--- Seleccione ---", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-md-offset-5 col-md-7">
                         <input type="submit" value="Guardar" class="btn bt-gris" />
                         <input type="button" value="Volver" class="btn btn-default " onclick="window.location.href='@Url.Action("Home", "Home")'" />

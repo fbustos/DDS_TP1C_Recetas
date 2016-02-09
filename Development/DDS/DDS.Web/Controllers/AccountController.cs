@@ -16,10 +16,12 @@ namespace DDS.Controllers
     public class AccountController : BaseController
     {
         private readonly IUsuarioService usuarioService;
+        private readonly ICondicionService condicionService;
 
-        public AccountController(IUsuarioService usuarioService)
+        public AccountController(IUsuarioService usuarioService, ICondicionService condicionService)
         {
             this.usuarioService = usuarioService;
+            this.condicionService = condicionService;
         }
 
         public ActionResult Login()
@@ -103,6 +105,11 @@ namespace DDS.Controllers
         {
             var usuario = usuarioService.GetByUsername(this.Current.User.Username);
             var model = Mapper.Map<Perfil, PerfilViewModel>(usuario.Perfil);
+            if (usuario.Condicion != null)
+            {
+                model.Condicion = usuario.Condicion.Id;
+            }
+            model.Condiciones = this.condicionService.GetCondiciones().ToList();
             return View(model);
         }
 
@@ -116,10 +123,24 @@ namespace DDS.Controllers
                 usuario.Perfil = perfil;
                 var usuarioBd = usuarioService.GetUsuario(usuario.Id);
                 usuarioBd.Perfil = perfil;
+                if (model.Condicion.HasValue)
+                {
+                    usuarioBd.Condicion = condicionService.GetCondicion(model.Condicion.Value);
+                }
+                else
+                {
+                    var exist = usuarioBd.Condicion.Usuarios.Any(u => u.Id == usuario.Id);
+                    if (exist)
+                    {
+                        usuarioBd.Condicion.Usuarios.Remove(usuarioBd);
+                    }
+                }
                 usuarioService.UpdateUsuario(usuarioBd);
                 usuarioService.SaveUsuario();
                 TempData["SuccessMessage"] = string.Format("Perfil '{0}' cargado correctamente.", usuario.Username);
             }
+
+            model.Condiciones = this.condicionService.GetCondiciones().ToList();
 
             return View(model);
         }

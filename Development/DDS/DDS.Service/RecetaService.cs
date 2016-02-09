@@ -120,13 +120,14 @@ namespace DDS.Service
             return this.condimentoRepository.GetById(id);
         }
 
-        public IEnumerable<Receta> GetFiltradas(int? Calorias, Temporada? Temporada, Dificultad? Dificultad)
+        public IEnumerable<Receta> GetFiltradas(int? Calorias, Temporada? Temporada, Dificultad? Dificultad, Condicion condicion)
         {
             return recetasRepository.GetAll().Where(
                 x=>
                 (Calorias == null || x.Calorias == Calorias) &&
                 (Temporada == null || x.Temporada == Temporada) &&
-                (Dificultad == null || x.Dificultad == Dificultad)
+                (Dificultad == null || x.Dificultad == Dificultad) &&
+                (condicion == null || (x.Condicion != null && x.Condicion.Id == condicion.Id))
             );
         }
 

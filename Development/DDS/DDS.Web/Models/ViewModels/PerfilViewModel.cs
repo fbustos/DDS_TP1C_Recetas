@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using DDS.Model.Enums;
+using DDS.Model.Models;
 
 namespace DDS.Models.ViewModels
 {
@@ -32,5 +34,10 @@ namespace DDS.Models.ViewModels
 
         [Range(1, int.MaxValue, ErrorMessage = "Seleccione la Rutina")]
         public Rutina Rutina { get; set; }
+
+        [Display(Name = "Condición Preexistente")]
+        public int? Condicion { get; set; }
+
+        public IList<Condicion> Condiciones { get; set; }
     }
 }
